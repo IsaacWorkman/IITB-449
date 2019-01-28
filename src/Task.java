@@ -23,4 +23,5 @@ public class Task {
         }
         penaltyValue = penalty;
     }
+    public char getName() {return this.getName();}
 }
