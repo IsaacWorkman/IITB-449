@@ -5,10 +5,9 @@ import java.util.PriorityQueue;
 public class Machine {
     int name;//durr
     
-    //tbd
-    public PriorityQueue<Task> taskOrder;
-    //an unordered list of possible tasks for the machine
-    public Task[] taskList;
+    //ordered list of possible tasks for given machine
+    public ArrayList<Task> sortedList;
+    private Task[] taskList = new Task[8];
     /*
      * constructor assigns name and makes the tasklist and 
      * populates it (size 8)
@@ -16,17 +15,69 @@ public class Machine {
     public Machine(int number, int[][] penalties) {
         
         name = number;
-        for (int i = 0; i < 8; i++) {
-            taskList[i] = new Task(i+1, penalties[name-1][i]);
+        char taskName = 'A';
+        for (int i = 0; i < 8; i++, taskName++) {
+            taskList[i] = new Task(i, taskName, penalties[name-1][i]);
         }
     }
     
-    //tbd will remove all but one task from tasklist
-    public void forcedAssign(int taskKeep) {
+    /*
+     * takes the task to keep and removes all other tasks.
+     * if there is already a forced partial assignment for the machine
+     * then returns executed false, else returns true if the forced assignment
+     * can occur.
+     *
+     */
+    public boolean forcedAssign(int taskKeep) {
+        boolean executed = false;
+        if (taskList.length > 1) {
+            Task toKeep = taskList[taskKeep];
+            sortedList.add(toKeep);
+            executed = true;
+            Task[] temp = {toKeep};
+            taskList = temp;
+        }
+        else {
+            if (taskList[0].getName() == taskKeep) {
+                executed = true;
+            }
+        }
+        return executed;
     }
-    //tbd removes only one task from tasklist
-    public void forbiddenTask(int toRemove) {
-        this.taskList[toRemove] = -1;
+    /*
+     * attempts to remove specified forbidden task from task list
+     * 
+     */
+    public boolean forbiddenTask(int toRemove) {
+        boolean executed = false;
+        if (taskList.length == 1) {
+            if (taskList[0].getNumber() != toRemove){
+                executed = true;
+            }
+        }
+        else {
+            taskList[toRemove] = null;
+            executed = true;
+        }
+        return executed;
+    }
+    
+    /*
+     * sorts array in terms of lowest penalty first
+     */
+    public void sortedQueue() {
+        if (sortedList.size() != 1) {
+            PriorityQueue<Task> temp = new PriorityQueue<Task>(taskList.length, (a,b)->a.getPenalty() - b.getPenalty());
+            for (int i = 0; i < taskList.length; i++) {
+                if (taskList[i] != null) {
+                    temp.add(taskList[i]);
+                }
+            }
+            for (int i = 0; i < temp.size(); i++) {
+                sortedList.add(temp.remove());
+            }
+        }
+        
     }
 
 }
