@@ -56,6 +56,7 @@ public class Machine {
                 executed = true;
             }
         }
+        
         else {
             taskList[toRemove] = null;
             executed = true;
