@@ -12,12 +12,12 @@ public class Machine {
      * constructor assigns name and makes the tasklist and 
      * populates it (size 8)
      */
-    public Machine(int number, int[][] penalties) {
+    public Machine(int number, char[][] penalties) {
         
         name = number;
         char taskName = 'A';
         for (int i = 0; i < 8; i++, taskName++) {
-            taskList[i] = new Task(i, taskName, penalties[name-1][i]);
+            taskList[i] = new Task(i, taskName, (int)penalties[name-1][i]);
         }
     }
     
@@ -28,10 +28,11 @@ public class Machine {
      * can occur.
      *
      */
-    public boolean forcedAssign(int taskKeep) {
+    public boolean forcedAssign(char taskKeep) {
         boolean executed = false;
+        int index = Character.getNumericValue(taskKeep);
         if (taskList.length > 1) {
-            Task toKeep = taskList[taskKeep];
+            Task toKeep = taskList[index];
             sortedList.add(toKeep);
             executed = true;
             Task[] temp = {toKeep};

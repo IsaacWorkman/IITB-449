@@ -11,8 +11,8 @@ public class Task {
     /*Constructor gives name based on switch and assigns
      * penalty value
      */
-    public Task(int num, char name, int penalty) {
-        this.name = name;
+    public Task(int num, char taskName, int penalty) {
+        taskName = name;
         number = num;
         penaltyValue = penalty;
     }
