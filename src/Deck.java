@@ -3,7 +3,6 @@ import java.util.ArrayList;
 /*The strange object found to contain cryptic, esoteric
  * and downright dastardly data.
  */
-
 public class Deck {
     
     //the list of the machines (that hold the lists of tasks)
