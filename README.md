@@ -7,3 +7,5 @@ Taylor
 Jessica
 Abi
 Karen
+Richard
+Harney
