@@ -11,10 +11,12 @@ public class TaskTree {
 	private int lowestPenalty; 
 	private TaskNode root = new TaskNode();
 	private ArrayList<Character> usedTasks = new ArrayList<Character>();
+	private ArrayList<Character> tooNearPenalty;
 	
 	//TODO: Add implementation to constructor method to receive massaged input data. (Aka the "kingdex")
-	public TaskTree(Deck deck) {
+	public TaskTree(Deck deck, ArrayList<Character> tooNearPenalty) {
 		this.deck = deck;
+		this.tooNearPenalty = tooNearPenalty;
 		findPairs(root);
 	}
 	
@@ -51,10 +53,9 @@ public class TaskTree {
 			if (currentNode.getDepth() != -1) {
 				usedTasks.add(currentNode.getTask().getName());
 			}
-			//Retrieves a set of eligible tasks for the next machine.
-			Task[] toCheckAsArray = this.deck.sortedDeck.get(currentNode.getDepth()+1).taskList; //Gets the array of possible tasks for the current machine. Assumes it is sorted.
-			ArrayList<Task> toCheck = new ArrayList<Task>(Arrays.asList(toCheckAsArray));		//Turns it into an arrayList
-			//Removes invalid tasks, such as bad neighbours or tasks that have alread been assigned.
+			//Retrieves an ArrayList of eligible tasks for the next machine. Assumes it is sorted.
+			ArrayList<Task> toCheck	 = (ArrayList<Task>) this.deck.sortedDeck.get(currentNode.getDepth()+1).sortedList.clone(); 
+			//Removes invalid tasks, such as bad neighbours or tasks that have already been assigned.
 			for (Task aTask: toCheck) {
 				if (currentNode.getInvalidNeighbours().contains(aTask.getName())){
 					toCheck.remove(aTask);
