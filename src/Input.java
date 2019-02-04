@@ -8,11 +8,11 @@ import java.io.File;
 public class Input{
 		
 		// NOTE: Have already been added into main (testing purpose only, delete when done)
-	ArrayList<Character[]> forcedPartial = null;
-	ArrayList<Character[]> forbiddenMachine = null;
-	ArrayList<Character[]> tooNear = null;
-	char[][] machinePen = new char[8][8]; // Creating it as an 8 by 8 
-	ArrayList<Character[]> tooNearPen = null;
+	static ArrayList<char[]> forcedPartial = null;
+	static ArrayList<char[]> forbiddenMachine = null;
+	static ArrayList<char[]> tooNear = null;
+	static char[][] machinePen = new char[8][8]; // Creating it as an 8 by 8 
+	static ArrayList<char[]> tooNearPen = null;
 	
 	public static void inputFile(String[] args) throws IOException{
 		BufferedReader br = null;
@@ -23,10 +23,6 @@ public class Input{
 		File InputFile = null;
 		File outputFile = null;
 		
-			
-		String Inlines = "";
-		char task = ' ';
-		char machine = ' ';
 		String Name = "";
 			
 		// If there is less than 2 files given in args then create an error 
@@ -66,7 +62,7 @@ public class Input{
 						Name = line;
 						while(!line.isEmpty()) {
 							line = br.readLine();
-							Name = Name + line;
+							Name = Name + ": /n" + line;
 							line = br.readLine();
 		
 						}
@@ -74,25 +70,91 @@ public class Input{
 						writer.close();
 					}
 					else if(line.contains("forced partial assignment")) {
-						Name = line;
+						line = br.readLine();
 						while(!line.isEmpty()) {
-							line = br.readLine();
-							Name = Name + line;
-							line = br.readLine();
-		
+							String[] fix = line.split(" " + "(" + ")" + ",");
+							for(int i = 0; i< fix.length; i++) {
+								if (fix[i] == "(") {
+									char x  = fix[i+1].charAt(0);
+									char[] y = fix[i+3].toCharArray();
+									forcedPartial.add(x, y);
+								}
+								i++;
+						line = br.readLine();
+							}
+							 
 						}
-						writer.println(Name);
-						writer.close();
 					}
 					else if(line.contains("forbidden machine")) {
-						
+						line = br.readLine();
+						while(!line.isEmpty()) {
+							String[] fix = line.split(" " + "(" + ")" + ",");
+							for(int i = 0; i< fix.length; i++) {
+								if (fix[i] == "(") {
+									char x  = fix[i+1].charAt(0);
+									char[] y = fix[i+3].toCharArray();
+									forbiddenMachine.add(x, y);
+								}
+								i++;
+						line = br.readLine();
+							}
+						}
 					}
-				}
+					
+					else if(line.contains("too-near tasks")) {
+						line = br.readLine();
+						while(!line.isEmpty()) {
+							String[] fix = line.split(" " + "(" + ")" + ",");
+							for(int i = 0; i< fix.length; i++) {
+								if (fix[i] == "(") {
+									char x  = fix[i+1].charAt(0);
+									char[] y = fix[i+3].toCharArray();
+									tooNear.add(x, y);
+								}
+								i++;
+						line = br.readLine();
+							}
+						}
+					}
+					
+					else if (line.contains("machine penalties")) {
+						line = br.readLine();
+						while(!line.isEmpty()) {
+							String[] fix = line.split(" ");
+							
+							for(int i = 0; i <= 7; i++) {
+								for(int j = 0; i <= 7; i++) {
+									char n = fix[i].charAt(0);
+									machinePen[i][j] = n;
+									j++;
+								}
+								i++;
+							}
+							
+						}
+					}
+					else if(line.contains("too-near penalities")) {
+						line = br.readLine();
+						while(!line.isEmpty()) {
+							String[] fix = line.split(" " + "(" + ")" + ",");
+							for(int i = 0; i< fix.length; i++) {
+								if (fix[i] == "(") {
+									char x  = fix[i+1].charAt(0);
+									char[] y = fix[i+3].toCharArray();
+									tooNearPen.add(x, y);
+								}
+								i++;
+						line = br.readLine();
+							}
+						}
 				
-			}
+					}
 			
+				}
+		}
 	}
+}
 			
 
-}
+
 
