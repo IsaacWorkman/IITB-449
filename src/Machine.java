@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-//It's not a task, dummy.
+//Machine which contains a name, tasklist, and a sortedList.
 public class Machine {
-    int name;//durr
+    
+	private int name;
+    public int name() {return this.name;}
     
     //ordered list of possible tasks for given machine
     public ArrayList<Task> sortedList;
     private Task[] taskList = new Task[8];
-    /*
-     * constructor assigns name and makes the tasklist and 
-     * populates it (size 8)
-     */
+    
+    //constructor assigns name, makes the tasklist, and populates it (size 8)
     public Machine(int number, char[][] penalties) {
         
         name = number;
@@ -26,7 +26,6 @@ public class Machine {
      * if there is already a forced partial assignment for the machine
      * then returns executed false, else returns true if the forced assignment
      * can occur.
-     *
      */
     public boolean forcedAssign(char taskKeep) {
         boolean executed = false;
@@ -47,7 +46,6 @@ public class Machine {
     }
     /*
      * attempts to remove specified forbidden task from task list
-     * 
      */
     public boolean forbiddenTask(int toRemove) {
         boolean executed = false;
