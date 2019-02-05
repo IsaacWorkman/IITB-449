@@ -8,11 +8,11 @@ import java.io.File;
 public class Input{
 		
 		// NOTE: Have already been added into main (testing purpose only, delete when done)
-	static ArrayList<char[]> forcedPartial = null;
-	static ArrayList<char[]> forbiddenMachine = null;
-	static ArrayList<char[]> tooNear = null;
-	static char[][] machinePen = new char[8][8]; // Creating it as an 8 by 8 
-	static ArrayList<char[]> tooNearPen = null;
+	public static ArrayList<char[]> forcedPartial = null;
+	public static ArrayList<char[]> forbiddenMachine = null;
+	public static ArrayList<char[]> tooNear = null;
+	public static char[][] machinePen = new char[8][8]; // Creating it as an 8 by 8 
+	public static ArrayList<char[]> tooNearPen = null;
 	
 	public static void inputFile(String[] args) throws IOException{
 		BufferedReader br = null;
