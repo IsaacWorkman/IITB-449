@@ -76,7 +76,6 @@ public class TaskTree {
 	}
 
 	//Calculate the total penalty value from currentNode to the root TaskNode
-	//TODO: Calculate too-near penalty
 	public int calculatePenalty(TaskNode currentNode) {
 		int penalty;
 		int depth = currentNode.getDepth();
