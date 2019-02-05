@@ -43,4 +43,11 @@ public class TaskNode {
 			this.children.add(new TaskNode(aTask, this.depth + 1, this));
 		}
 	}
+	public char getName() {return this.template.getName();}
+	
+	
+	//TODO: Complete function stub
+	public int getTooNearPenalty(char adjacent) {
+		return 0;
+	}
 }

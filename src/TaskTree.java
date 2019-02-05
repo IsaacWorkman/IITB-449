@@ -14,7 +14,7 @@ public class TaskTree {
 	private ArrayList<char[]> tooNearPenalty;
 
 	//TODO: Add implementation to constructor method to receive massaged input data. (Aka the "kingdex")
-	public TaskTree(Deck deck, ArrayList<Character> tooNearPenalty) {
+	public TaskTree(Deck deck, ArrayList<char[]> tooNearPenalty) {
 		this.deck = deck;
 		this.tooNearPenalty = tooNearPenalty;
 		findPairs(root);
@@ -77,11 +77,11 @@ public class TaskTree {
 
 	//Calculate the total penalty value from currentNode to the root TaskNode
 	public int calculatePenalty(TaskNode currentNode) {
-		int penalty;
+		int penalty = 0;
 		int depth = currentNode.getDepth();
 		for (int i = 0; i < depth; i++) {
 			penalty += currentNode.getTask().getPenalty();
-			penalty += currentNode.getToNearPenalty(currentNode.getParent().getName());
+			penalty += currentNode.getTooNearPenalty(currentNode.getParent().getName());
 			currentNode = currentNode.getParent();
 		}
 		return penalty;
