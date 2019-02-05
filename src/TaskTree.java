@@ -37,18 +37,20 @@ public class TaskTree {
 	}
 
 	//Finds the best set of machine:task pairs.
-	//TODO: Halt on branches exceeding the current best penalty score.
 	public void findPairs(TaskNode currentNode) {
 		while (currentNode.getDepth() < 8) {
-			//Checks to see if it's at a leaf. If so, perform penalty calculations.
-			if (currentNode.getDepth() == 7) {
-				int currentPenalty = calculatePenalty(currentNode);
-				if (currentPenalty < this.lowestPenalty) {
-					this.lowestPenalty = currentPenalty;
-					this.bestNode = currentNode;
-					break;
-				}
+			int currentPenalty = calculatePenalty(currentNode);
+			// halt on branches exceeding the current best penalty score.
+			if (currentPenalty > this.lowestPenalty) {
+				break;
 			}
+			// updates bestNode if node is a leaf and has a lower penalty score
+			if (currentPenalty < this.lowestPenalty && currentNode.getDepth() == 7) {
+				this.lowestPenalty = currentPenalty;
+				this.bestNode = currentNode;
+				break;
+			}
+		}
 			//Adds the current node's name to the list of used tasks. Do not repeat tasks.
 			if (currentNode.getDepth() != -1) {
 				usedTasks.add(currentNode.getTask().getName());
