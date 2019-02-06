@@ -23,8 +23,6 @@ public class Input{
 		File outputFile = null;
 		
 		String Name = "";
-		//char[] pTasks = new char[] {'1','2','3','4','5','6','7','8'};
-		//char[] pMachines = new char[] {'A','B','C','D','E','F','G','H'};
 		String pmachine = "ABCDEFGH";
 		String ptasks = "12345678";
 			
@@ -93,6 +91,9 @@ public class Input{
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
 							}
+							char[] charArray = {tasks,machines};
+							forcedPartial.add(charArray);
+							
 							line = br.readLine(); 
 						}
 						line = br.readLine();
@@ -110,6 +111,9 @@ public class Input{
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
 							}
+							char[] charArray = {tasks,machines};
+							forbiddenMachine.add(charArray);
+							
 							line = br.readLine(); 
 						}
 						line = br.readLine();
@@ -122,12 +126,13 @@ public class Input{
 							char tasks  = splitline[1];
 							char machines = splitline[3];
 							int taskin = ptasks.indexOf(tasks); 
-							int taskout = ptasks.indexOf(machines); 
+							int taskout = pmachine.indexOf(machines); 
 							if(taskin == -1 || taskout == -1) {
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
 							}
-							tooNearPen.add(tasks,machines);
+							char[] charArray = {tasks,machines};
+							tooNear.add(charArray);
 							
 							line = br.readLine(); 
 						}
@@ -164,6 +169,9 @@ public class Input{
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
 							}
+							char[] charArray = {tasks,machines};
+							tooNearPen.add(charArray);
+							
 							line = br.readLine(); 
 						}
 						line = br.readLine();
