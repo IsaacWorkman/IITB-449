@@ -11,7 +11,7 @@ public class InputTest {
     
 	String filename = "CalculatorLogic.java";
 	
-	private boolean noDefaultConstructor(){
+	private boolean noDefaultConstructor(){ 
 	boolean noDefault = true;
 	try {
 		BufferedReader in = new BufferedReader(new FileReader("Input.java"));
