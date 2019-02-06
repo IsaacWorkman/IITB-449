@@ -1,23 +1,24 @@
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class InputTest {
+import org.junit.jupiter.api.Test;
+
+public class MachineTest {
     
-	String filename = "CalculatorLogic.java";
+	String filename = "Machine.java";
 	
 	private boolean noDefaultConstructor(){
 	boolean noDefault = true;
 	try {
-		BufferedReader in = new BufferedReader(new FileReader("Input.java"));
+		BufferedReader in = new BufferedReader(new FileReader("Machine.java"));
 		String line = in.readLine();
 		while (line != null) {
-			if (line.contains("public class Input{")) {
+			if (line.contains("public class Machine{")) {
 				noDefault = false;
 			}
 			line = in.readLine();
@@ -35,17 +36,19 @@ public class InputTest {
 		assertTrue("Checked for the existence of a default constructor, there shouldn't be one.",  noDefaultConstructor());		
 	}	
 
-	@Test
-	public void test_Input1() {
-		Input InputTest = newInput();
-		String expected = "2";
-		String actual = InputTest.("4");
-		
-		assertEquals("Created new Input(): Testing for ___ result", expected, actual);
-	}
+// taskName++ what does it mean?
 	
 	@Test
-	public void test_input2() {
-		Input i
+	public void testsortedQueue(){
+		Machine sortedQueueTest = new Machine();
+		String expected = "idk";
+		String actual = sortedQueueTest.sortedQueue("idk");
+		
+		assertEquals("Created new Machine(): Testing for sortedQueue(1) result", expected, actual);
+
 	}
+	
+	}
+	
+
 }
