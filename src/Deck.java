@@ -18,6 +18,9 @@ public class Deck {
      * if an error occurs sets errorOccured true which will need to
      * be checked after the constructor returns. 
      */
+    public Deck(Input ourInput, String outputFile) {
+    	this(ourInput.forbiddenMachine, ourInput.forcedPartial, ourInput.machinePen, outputFile);
+    }
     public Deck(ArrayList<char[]> forbidden, ArrayList<char[]> forced, char[][] penalties, String outputFile) {	
     	sortedDeck = new ArrayList<Machine>(8);
         int machineIndex;
