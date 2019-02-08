@@ -19,23 +19,20 @@ public class Deck {
      * be checked after the constructor returns. 
      */
     public Deck(Input ourInput, String outputFile) {
-    	this(ourInput.forbiddenMachine, ourInput.forcedPartial, ourInput.machinePen, outputFile);
-    }
-    public Deck(ArrayList<char[]> forbidden, ArrayList<char[]> forced, char[][] penalties, String outputFile) {	
-    	sortedDeck = new ArrayList<Machine>(8);
+        sortedDeck = new ArrayList<Machine>(8);
         int machineIndex;
-        ArrayList<Character> assigned = new ArrayList<Character>(forced.size());
+        ArrayList<Character> assigned = new ArrayList<Character>(ourInput.forcedPartial.size());
         //creates deck containing the 8 machines
         for (int i = 1; i <= 8; i++) {
-            sortedDeck.add(new Machine(i, penalties));
+            sortedDeck.add(new Machine(i, ourInput.machinePen, ourInput.tooNearPen));
         }
         /*
          * iterates through forced assignments array and attempts to 
          * force the assignment. if an error occurred executed will return false and 
          * the constructor will set errorExecuted to true then return early.
          */
-        for (int i = 0; i < forced.size(); i++) {
-            char[] pair = forced.get(i);
+        for (int i = 0; i < ourInput.forcedPartial.size(); i++) {
+            char[] pair = ourInput.forcedPartial.get(i);
             machineIndex = Character.getNumericValue(pair[0]) -1;
             if (assigned.contains(pair[1])) {
                 errorOccured = 1;
@@ -55,8 +52,8 @@ public class Deck {
          * remove any forbidden machines. if an error occurred executed will return false and 
          * the constructor will set errorExecuted to true then return early.
          */
-        for (int i = 0; i < forbidden.size(); i++) {
-            char[] pair = forbidden.get(i);
+        for (int i = 0; i < ourInput.forbiddenMachine.size(); i++) {
+            char[] pair = ourInput.forbiddenMachine.get(i);
             machineIndex = Character.getNumericValue(pair[0]) -1;
             boolean executed = sortedDeck.get(machineIndex).forbiddenTask(Character.getNumericValue(pair[1]));
             if (!executed) {
