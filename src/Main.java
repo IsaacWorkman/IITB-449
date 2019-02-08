@@ -5,16 +5,9 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-		//Old arrays
-		/*ArrayList<char[]> forcedPartial = null;
-		ArrayList<char[]> forbiddenMachine = null;
-		ArrayList<char[]> tooNear = null;
-		char[][] machinePen = new char[8][8];
-		ArrayList<char[]> tooNearPen = null;*/
 		
-		Input ourInput;
 		try{
-			ourInput = new Input(args);
+			Input ourInput = new Input(args);
 			Deck deck = new Deck(ourInput, args[1]);
 		}
 		catch(IOException e) {
