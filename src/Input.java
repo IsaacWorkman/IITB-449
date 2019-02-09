@@ -167,50 +167,51 @@ public class Input{
 						while(!line.isEmpty()) {
 							//System.out.println("c);
 							String[] fix = line.split(" ");
-							
-							for(int i = 0; i <= 7; i++) {
-								//System.out.println(i+"A");
-								for(int j = 0; j <= 7; j++) {
-									//System.out.println("e");
+							for( int i = 0; i <= 7; i++) {
+								for( int j = 0; j <= 7; j++) {
 									char n = fix[j].charAt(0);
-									//System.out.println("f");
 									machinePen[i][j] = n;
-									//System.out.println(machinePen[i][j]);
+									System.out.print(machinePen[i][j]);
 								}
-							} line = br.readLine();			
+							} line = br.readLine();
+							//System.out.println(line);		
 						}
 						line = br.readLine();
-						/*
+						
 						for (int k=0; k<=7; k++){
 								for (int h=0; h<=7; h++){
 									System.out.print(machinePen[k][h]);
 
 								}
-						}*/
-						System.out.println(machinePen[0][0]);
-						System.out.println(machinePen[1][1]);
+						}
+						//System.out.println(machinePen[0][0]);
+						//System.out.println(machinePen[1][1]);
 
 					}
 					// Splitting the read line and adding 2 variables into the character array if the character is (
-					else if(line.contains("too-near penalities")) {
+					else if(line.contains("too-near penalties")) {
 						System.out.println("too-near penalties");
 						line = br.readLine();
+						//System.out.println(line+"!");
 						while(!line.isEmpty()) {
 							char[] splitline = line.toCharArray();
 							char tasks  = splitline[1];
 							char machines = splitline[4];
-							int taskin = ptasks.indexOf(tasks); 
+							char num = splitline[7];
+							int taskin = pmachine.indexOf(tasks); 
 							int taskout = pmachine.indexOf(machines); 
-							if(taskin == -1 || taskout == -1) {
+							int theNum = ptasks.indexOf(num);
+							if(taskin == -1 || taskout == -1 || theNum == -1) {
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
 							}
-							char[] charArray = {tasks,machines};
+							char[] charArray = {tasks,machines,num};
 							tooNearPen.add(charArray);
-							
+							System.out.println(charArray);
 							line = br.readLine(); 
 						}
 						line = br.readLine();
+						System.out.println(line);
 					}
 			
 				}
@@ -218,7 +219,4 @@ public class Input{
 		}	
 
 }
-			
-
-
 
