@@ -193,30 +193,42 @@ public class Input{
 						System.out.println("too-near penalties");
 						line = br.readLine();
 						//System.out.println(line+"!");
-						while(!line.isEmpty()) {
+						while(line != null) {
+							//System.out.println("d");
 							char[] splitline = line.toCharArray();
-							char tasks  = splitline[1];
-							char machines = splitline[4];
+							char machines  = splitline[1];
+							char tasks = splitline[4];
 							char num = splitline[7];
-							int taskin = pmachine.indexOf(tasks); 
-							int taskout = pmachine.indexOf(machines); 
-							int theNum = ptasks.indexOf(num);
+							//System.out.println(num);
+							int taskin = ptasks.indexOf(machines); 
+							int taskout = ptasks.indexOf(tasks); 
+							int theNum = pmachine.indexOf(num);
+							//System.out.println(taskin);
+							//System.out.println(taskout);
+							//System.out.println(theNum);
 							if(taskin == -1 || taskout == -1 || theNum == -1) {
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
 							}
-							char[] charArray = {tasks,machines,num};
+							char[] charArray = {machines,tasks,num};
 							tooNearPen.add(charArray);
-							System.out.println(charArray);
 							line = br.readLine(); 
+							System.out.println(charArray);
+							//System.out.println("a");
 						}
+						//System.out.println("c");
 						line = br.readLine();
-						System.out.println(line);
+						if (line == null){
+							//	System.out.println("f");
+								br.close();
+							}
 					}
+
 			
 				}
 				
 		}	
 
 }
+			
 
