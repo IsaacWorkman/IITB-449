@@ -166,6 +166,25 @@ public class Input{
 					else if (line.contains("machine penalties")) {
 						System.out.println("Machine penalties");
 						line = br.readLine();
+						//System.out.println("error1");
+						String line1 = line.replaceAll("\\s+", "");
+						//System.out.println("error2");
+						String kmachine = "012345678";
+						//System.out.println("error3");
+						char[] splitline = line1.toCharArray();
+						//System.out.println("error4");
+						for(int i = 0; i<8; i++){
+						//	System.out.println("error");
+							char machines  = splitline[i];
+						//	System.out.println("error1");
+							int taskin = kmachine.indexOf(machines); 
+						//	System.out.println("error2");
+							if(taskin == -1) {
+								writer.println("Error: there are no such Characters");
+								System.out.println("error");
+								System.exit(1);
+							}
+						}
 		
 						char[] charArrays = new char[line.length()];
 						//System.out.println(line.length());
@@ -196,6 +215,25 @@ public class Input{
 							//System.out.println(line);		
 						}
 						line = br.readLine();
+						//System.out.println("error1");
+						line1 = line.replaceAll("\\s+", "");
+						//System.out.println("error2");
+						//System.out.println("error3");
+						splitline = line1.toCharArray();
+						//System.out.println("error4");
+						for(int i = 0; i<8; i++){
+						//	System.out.println("error");
+							char machines  = splitline[i];
+						//	System.out.println("error1");
+							int taskin = kmachine.indexOf(machines); 
+						//	System.out.println("error2");
+							if(taskin == -1) {
+								writer.println("Error: there are no such Characters");
+								System.out.println("error");
+								System.exit(1);
+							}
+						}
+		
 
 						//System.out.print(machinePen[2][1]);
 						/*for (int k=0; k<=7; k++){
