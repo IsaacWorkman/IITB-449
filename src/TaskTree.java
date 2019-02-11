@@ -54,6 +54,7 @@ public class TaskTree {
 				usedTasks.add(currentNode.getTask().getName());
 			}
 			//Retrieves an ArrayList of eligible tasks for the next machine. Assumes it is sorted.
+			@SuppressWarnings("unchecked")
 			ArrayList<Task> toCheck	 = (ArrayList<Task>) this.deck.sortedDeck.get(currentNode.getDepth()+1).sortedList.clone();
 			//Removes invalid tasks, such as bad neighbours or tasks that have already been assigned.
 			for (Task aTask: toCheck) {
