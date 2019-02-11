@@ -74,6 +74,7 @@ public class Input{
 							Name = Name + "\n" + line;
 							line = br.readLine();
 						}
+						writer = new PrintWriter(outputFile, "UTF-8");
 						writer.println(Name);
 						line = br.readLine();
 						System.out.println(Name);
