@@ -38,7 +38,8 @@ public class TaskTree {
 
 	//Finds the best set of machine:task pairs.
 	public void findPairs(TaskNode currentNode) {
-		while (currentNode.getDepth() < 8) {
+		System.out.println("Checking node of depth: " + currentNode.getDepth());
+		while (currentNode.getDepth() < 8 && currentNode.getDepth() > 0) {
 			int currentPenalty = calculatePenalty(currentNode);
 			// halt on branches exceeding the current best penalty score.
 			if (currentPenalty > this.lowestPenalty) {
@@ -76,7 +77,6 @@ public class TaskTree {
 			}
 			usedTasks.remove(currentNode.getTask().getName());
 		}
-	}
 
 	//Calculate the total penalty value from currentNode to the root TaskNode
 	public int calculatePenalty(TaskNode currentNode) {
@@ -87,6 +87,7 @@ public class TaskTree {
 			penalty += currentNode.getTooNearPenalty(currentNode.getParent().getName());
 			currentNode = currentNode.getParent();
 		}
+		System.out.println("current penalty: "+ penalty);
 		return penalty;
 	}
 }

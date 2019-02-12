@@ -8,10 +8,12 @@ public class Main {
 		
 		try{
 			Input ourInput = new Input(args);
-			Deck deck = new Deck(ourInput, args[1]);
+			Deck ourDeck = new Deck(ourInput, args[1]);
+			TaskTree myTree = new TaskTree(ourDeck, ourInput.tooNearPen);
+			System.out.println("lowest penalty: " + myTree.getPenalty());
 		}
 		catch(IOException e) {
-			System.out.println("Something went wrong in \"Input\". Unsure what it is. Error:");
+			System.out.println("Something went wrong. Unsure what it is. Error:");
 			System.out.println(e);
 		}
 		//Construct deck based off of calculations performed by Input static class.
