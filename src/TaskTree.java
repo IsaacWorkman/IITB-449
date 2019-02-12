@@ -83,8 +83,9 @@ public class TaskTree {
 		int penalty = 0;
 		int depth = currentNode.getDepth();
 		for (int i = 0; i < depth; i++) {
+			TaskNode parent = currentNode.getParent();
 			penalty += currentNode.getTask().getPenalty();
-			penalty += currentNode.getTooNearPenalty(currentNode.getParent().getName());
+			penalty += parent.getTooNearPenalty(currentNode.getName());
 			currentNode = currentNode.getParent();
 		}
 		System.out.println("current penalty: "+ penalty);
