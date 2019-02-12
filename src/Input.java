@@ -10,7 +10,7 @@ public class Input{
 	public ArrayList<char[]> forbiddenMachine = new ArrayList<char[]>() ;
 	public ArrayList<char[]> tooNear = new ArrayList<char[]>();
 	public ArrayList<String[]> tooNearPen = new ArrayList<String[]>();
-	public char machinePen[][] = new char[8][8]; // Since size is already known make double array
+	public int machinePen[][] = new int[8][8]; // Since size is already known make double array
 
 	public Input(String[] args) throws IOException{
 		BufferedReader br = null;
@@ -166,89 +166,37 @@ public class Input{
 					else if (line.contains("machine penalties")) {
 						System.out.println("Machine penalties");
 						line = br.readLine();
-						String[] splited = line.split("\\s+");
-						int length = splited.length;
+						
+						
 
-						for(int i = 0; i < length; i++){
-							if (splited[i] == "(" || splited[i] == ")" || splited[i] == ","){
+						
 
-							}
-							try{
-								int num = Integer.parseInt(splited[i]);
-							}
-							catch(Exception e) {
-								System.out.println("Error in Machine Penalties:");
-								System.out.println(e);
-							}
-
-
-						}
-
-
-						char[] charArrays = new char[line.length()];
-						//System.out.println(line.length());
-						line = line.replaceAll("\\s+", "");
-						charArrays = line.toCharArray();
-				
 						//System.out.println(line.length());
 						//System.out.println(charArrays[7]);
 						int count = 0;
 						while(!line.isEmpty()) {
-							for( int i = 0; i < 1; i++) {	
-								for( int j = 0; j <= 7; j++) {
-									char c = charArrays[j];
-									machinePen[j][count] = c;
-									//System.out.print(machinePen[i][j]);
-									//System.out.println(i+"!!!!");
-									//System.out.println(j);
-								}
-								count++;
-							} 
+							String[] splitted = line.split("\\s+");
+							int length = splitted.length;
+							if (splitted.length != 8) {
+								//TODO:file content error
+							}
+							for( int i = 0; i < 1; i++) {
+								
+								machinePen[count][i] = Integer.parseInt(splitted[i]);
+							}
 							line = br.readLine();
-						//System.out.println(line.length());
-						line = line.replaceAll("\\s+", "");
-						charArrays = line.toCharArray();
+							count++;
+						} 
+						line = br.readLine();
 						//System.out.println(charArrays);
 							
 							//System.out.print(machinePen[0][7]);
 							//System.out.println(line);		
-						}
-						/*line = br.readLine();
-						//System.out.println("error1");
-						line1 = line.replaceAll("\\s+", "");
-						//System.out.println("error2");
-						//System.out.println("error3");
-						splitline = line1.toCharArray();
-						//System.out.println("error4");
-						for(int i = 0; i<8; i++){
-						//	System.out.println("error");
-							char machines  = splitline[i];
-						//	System.out.println("error1");
-							int taskin = kmachine.indexOf(machines); 
-						//	System.out.println("error2");
-							if(taskin == -1) {
-								writer.println("Error: there are no such Characters");
-								System.out.println("error");
-								System.exit(1);
-							}
-						}*/
-		
-
-						//System.out.print(machinePen[2][1]);
-						/*for (int k=0; k<=7; k++){
-								for (int h=0; h<=7; h++){
-									System.out.print(machinePen[k][h]);
-								}
-						}*/
-
-						//System.out.println(machinePen[0][0]);
 						System.out.println(machinePen[0][0]);
 						System.out.println(machinePen[1][1]);
 						System.out.println(machinePen[2][2]);
 						System.out.println(machinePen[3][3]);
 						System.out.println(machinePen[4][4]);
-						line = br.readLine();
-
 					}
 					// Splitting the read line and adding 2 variables into the character array if the character is (
 					else if(line.contains("too-near penalties")) {
