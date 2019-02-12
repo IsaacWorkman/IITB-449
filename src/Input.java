@@ -77,13 +77,15 @@ public class Input{
             line = br.readLine();
         }
         Name = line;
-
+        
+        line = br.readLine();
         while(line.isEmpty()) {
             line = br.readLine();
         }
         if (line.contains("forced partial assignment:") && (line.replace(" ", "").equals("forcedpartialassignment:"))) {
+            System.out.println("hi");
             line = br.readLine();
-            while(!line.contains("forced partial assignment:")) {
+            while(!line.contains("forbidden machine:")) {
                 //System.out.println(line);
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
