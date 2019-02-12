@@ -12,6 +12,7 @@ public class TaskTree {
 	private TaskNode root = new TaskNode();
 	private ArrayList<Character> usedTasks = new ArrayList<Character>();
 	private ArrayList<String[]> tooNearPenalty;
+	boolean penaltySet = false;
 
 	//TODO: Add implementation to constructor method to receive massaged input data. (Aka the "kingdex")
 	public TaskTree(Deck deck, ArrayList<String[]> tooNearPenalty) {
@@ -39,19 +40,25 @@ public class TaskTree {
 	//Finds the best set of machine:task pairs.
 	public void findPairs(TaskNode currentNode) {
 		System.out.println("Checking node of depth: " + currentNode.getDepth());
-		while (currentNode.getDepth() < 8 && currentNode.getDepth() > 0) {
+		//while (currentNode.getDepth() < 8 && currentNode.getDepth() > 0) {
 			int currentPenalty = calculatePenalty(currentNode);
+			System.out.println("Jess says put this here: current penalty = " + currentPenalty);
 			// halt on branches exceeding the current best penalty score.
-			if (currentPenalty > this.lowestPenalty) {
-				break;
-			}
+//			
+//			if (!penaltySet && (currentNode.getDepth() == 7)) {
+//				this.lowestPenalty = currentPenalty;
+//				penaltySet = true;
+//			}
+//			if (currentPenalty > this.lowestPenalty) {
+//				break;
+//			}
 			// updates bestNode if node is a leaf and has a lower penalty score
-			if (currentPenalty < this.lowestPenalty && currentNode.getDepth() == 7) {
+			if ((currentPenalty < this.lowestPenalty) && (currentNode.getDepth() == 7)) {
 				this.lowestPenalty = currentPenalty;
 				this.bestNode = currentNode;
-				break;
+				return;
 			}
-		}
+		//}
 			//Adds the current node's name to the list of used tasks. Do not repeat tasks.
 			if (currentNode.getDepth() != -1) {
 				usedTasks.add(currentNode.getTask().getName());
@@ -60,22 +67,38 @@ public class TaskTree {
 			@SuppressWarnings("unchecked")
 			ArrayList<Task> toCheck	 = (ArrayList<Task>) this.deck.sortedDeck.get(currentNode.getDepth()+1).sortedList.clone();
 			//Removes invalid tasks, such as bad neighbours or tasks that have already been assigned.
+			@SuppressWarnings("unchecked")
+			ArrayList<Task> keptTasks = (ArrayList<Task>) toCheck.clone();
+			
 			for (Task aTask: toCheck) {
+				System.out.println(aTask.getName());
 				if (currentNode.getInvalidNeighbours().contains(aTask.getName())){
-					toCheck.remove(aTask);
+					keptTasks.remove(aTask);
 				}
 				if(usedTasks.contains(aTask.getName())){
-					toCheck.remove(aTask);
+					keptTasks.remove(aTask);
 				}
 			}
-			//Creates new children based off of the toCheck ArrayList
-			currentNode.setChildren(toCheck);
+			//Creates new children based off of the keptTasks ArrayList
+			
+			currentNode.setChildren(keptTasks);
+			System.out.println("Number of children = " + currentNode.getChildren().size());
+			if(currentNode.getChildren().isEmpty()) {
+				return;
+			}
 			//checks for a better (lower) penalty score.
 			//Recurses on each potential child.
 			for (TaskNode child : currentNode.getChildren()) {
 				findPairs(child);
 			}
-			usedTasks.remove(currentNode.getTask().getName());
+//			for(TaskNode alpha : currentNode.getChildren()) {
+//				System.out.print(alpha.getName() + " ");
+//			}
+			System.out.println();
+			if (currentNode.getDepth() != -1) {
+				//System.out.println("Hello jess! : " + currentNode.getTask().getName());
+				usedTasks.remove((Character) currentNode.getTask().getName());
+			}
 		}
 
 	//Calculate the total penalty value from currentNode to the root TaskNode
@@ -89,6 +112,10 @@ public class TaskTree {
 			currentNode = currentNode.getParent();
 		}
 		System.out.println("current penalty: "+ penalty);
+		if(!penaltySet && (depth == 7)) {
+			penaltySet = true;
+			this.lowestPenalty = penalty;
+		}
 		return penalty;
 	}
 }

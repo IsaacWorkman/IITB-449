@@ -56,7 +56,7 @@ public class Machine {
         }
        
         else {
-            int index = Character.getNumericValue(taskKeep)-10;
+            int index = Character.getNumericValue(toRemove)-10;
             taskList[index] = null;
             executed = true;
         }

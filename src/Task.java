@@ -11,7 +11,7 @@ public class Task {
     
     //Constructor 
     public Task(int num, char taskName, int penalty, ArrayList<String[]> tooNear) {
-    	taskName = name;
+    	this.name = taskName;
         number = num;
         penaltyValue = penalty;
         for (int i = 0; i < tooNear.size(); i++) {
@@ -22,7 +22,7 @@ public class Task {
         }
     }
     
-    public char getName() {return this.getName();}
+    public char getName() {return this.name;}
     
     public int getPenalty() {return penaltyValue;}
     

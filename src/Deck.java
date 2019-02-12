@@ -66,6 +66,16 @@ public class Deck {
         for (Machine mach: sortedDeck) {
             mach.sortedQueue();
         }
+        //print stuff
+        
+        for (int i = 0; i < 8; i++) {
+        	System.out.println("machine index: " + i);
+        	for (int j = 0; j < sortedDeck.get(i).sortedList.size(); j++) {
+        		System.out.println("task" + sortedDeck.get(i).sortedList.get(j).getName());
+        	}
+        }
+        
+        
     }
     
     private void outputError(int errorCode, String outputFile) {
