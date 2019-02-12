@@ -49,15 +49,15 @@ public class TaskTree {
 				this.lowestPenalty = currentPenalty;
 				penaltySet = true;
 			}
-			if (currentPenalty > this.lowestPenalty) {
-				return;
-			}
-			// updates bestNode if node is a leaf and has a lower penalty score
-			if ((currentPenalty < this.lowestPenalty) && (currentNode.getDepth() == 7)) {
-				this.lowestPenalty = currentPenalty;
-				this.bestNode = currentNode;
-				return;
-			}
+//			if (currentPenalty > this.lowestPenalty) {
+//				return;
+//			}
+//			// updates bestNode if node is a leaf and has a lower penalty score
+//			if ((currentPenalty < this.lowestPenalty) && (currentNode.getDepth() == 7)) {
+//				this.lowestPenalty = currentPenalty;
+//				this.bestNode = currentNode;
+//				return;
+//			}
 		//}
 			//Adds the current node's name to the list of used tasks. Do not repeat tasks.
 			if (currentNode.getDepth() != -1) {

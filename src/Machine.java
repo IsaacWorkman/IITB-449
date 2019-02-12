@@ -17,7 +17,7 @@ public class Machine {
         name = number;
         char taskName = 'A';
         for (int i = 0; i < 8; i++, taskName++) {
-            taskList[i] = new Task(i, taskName, penalties[number][i], tooNear);
+            taskList[i] = new Task(i, taskName, penalties[number-1][i], tooNear);
         }
     }
     

@@ -64,179 +64,170 @@ public class Input{
 
 		// Reading input file line by line, if the line contains : then that would be the start of a new variable. 
 		String line = br.readLine();
-			while(line != null) {
-					// Taking the name and putting it into the output file
-					// This is the only thing this class needs to put into the output file
-					if(line.contains("Name")) {
-						Name = line;
-						while(!line.isEmpty()) {
-							line = br.readLine();
-							Name = Name + "\n" + line;
-							line = br.readLine();
-						}
-						writer.println(Name);
-						line = br.readLine();
-						System.out.println(Name);
-						System.out.println(line);
-					} 
-					// Splitting the read line and adding 2 variables into the character array if the character is (
-					else if(line.contains("forced partial assignment")) {
-						line = br.readLine();
-						//System.out.println(line);
-						int  i=0;
-						while(!line.isEmpty()) {
-							//System.out.println(line);
-							char[] splitline = line.toCharArray();
-							char machines  = splitline[1];
-							//System.out.println(machines);
-							char tasks = splitline[4];
-							//System.out.println(tasks);
-							int taskin = pmachine.indexOf(machines); 
-							//System.out.println(taskin);
-							int taskout = ptasks.indexOf(tasks); 
-							//System.out.println(taskout);
-							if(taskin == -1 || taskout == -1) {
-								writer.println("Error: there are no such Characters");
-								System.exit(1);
-							}
-							//System.out.print("a\n" );
-							char[] charArray = {machines,tasks};
-							//forcedPartial[forcedPartial.length] = charArray; 
-							//System.out.print("b\n" );
-							forcedPartial.add(charArray);
-							//System.out.print("c\n" );
-							System.out.println(charArray);
-							line = br.readLine(); 
-							//System.out.println(line);
-						}
-						line = br.readLine();
-						i++;
-						
-					}
-					// Splitting the read line and adding 2 variables into the character array if the character is (
-					else if(line.contains("forbidden machine")) {
-						line = br.readLine();
-						System.out.println("forbidden machine");
-						while(!line.isEmpty()) {
-							char[] splitline = line.toCharArray();
-							char machines  = splitline[1];
-							char tasks = splitline[4];
-							int taskin = pmachine.indexOf(machines); 
-							int taskout = ptasks.indexOf(tasks); 
-							if(taskin == -1 || taskout == -1) {
-								writer.println("Error: there are no such Characters");
-								System.exit(1);
-							}
-							char[] charArray = {machines,tasks};
-							forbiddenMachine.add(charArray);
-							
-							line = br.readLine(); 
-							System.out.println(charArray);
-						}
-						line = br.readLine();
-					}
-					// Splitting the read line and adding 2 variables into the character array if the character is (
-					else if(line.contains("too-near tasks")) {
-						line = br.readLine();
-						System.out.println("too-near tasks");
-						while(!line.isEmpty()) {
-							char[] splitline = line.toCharArray();
-							char machines  = splitline[1];
-							//System.out.println(machines);
-							char tasks = splitline[4];
-							//System.out.println(machines);
-							int taskin =ptasks.indexOf(machines); 
-							int taskout = ptasks.indexOf(tasks); 
-							if(taskin == -1 || taskout == -1) {
-								writer.println("Error: there are no such Characters");
-								System.exit(1);
-							}
-							char[] charArray = {machines,tasks};
-							tooNear.add(charArray);
-							//System.out.println("a");
-							line = br.readLine();
-							System.out.println(charArray); 
-						}
-						line = br.readLine();
-						
+				// Taking the name and putting it into the output file
+				// This is the only thing this class needs to put into the output file
+		if (line == null) {
+			return;
+		}
+		while (!line.contains("Name")) {
+			line = br.readLine();
+		}
+		line = br.readLine();
+		while (line.isEmpty()) {
+			line = br.readLine();
+		}
+		Name = line;
+		
+		//Jess's Stuff goes after here
 
-					}
-			
-					// Splitting each line and adding all the characters into the array at point ij. 
-					else if (line.contains("machine penalties")) {
-						System.out.println("Machine penalties");
-						line = br.readLine();
-						
-						
-
-						
-
-						//System.out.println(line.length());
-						//System.out.println(charArrays[7]);
-						int count = 0;
-						while(!line.isEmpty()) {
-							String[] splitted = line.split("\\s+");
-							int length = splitted.length;
-							if (splitted.length != 8) {
-								//TODO:file content error
-							}
-							for( int i = 0; i < 1; i++) {
-								
-								machinePen[count][i] = Integer.parseInt(splitted[i]);
-							}
-							line = br.readLine();
-							count++;
-						} 
-						line = br.readLine();
-						//System.out.println(charArrays);
-							
-							//System.out.print(machinePen[0][7]);
-							//System.out.println(line);		
-						System.out.println(machinePen[0][0]);
-						System.out.println(machinePen[1][1]);
-						System.out.println(machinePen[2][2]);
-						System.out.println(machinePen[3][3]);
-						System.out.println(machinePen[4][4]);
-					}
-					// Splitting the read line and adding 2 variables into the character array if the character is (
-					else if(line.contains("too-near penalties")) {
-						System.out.println("too-near penalties");
-						line = br.readLine();
-						while(line != null) {
-							//System.out.println(line);
-							line = line.replace(")", "");
-							line = line.replace("(", "");
-							line = line.replace(",", "");
-							String[] splitLine = line.split("\\s+");
-							//char[] splitline = line.toCharArray();
-							String machines  = splitLine[0];
-							String tasks = splitLine[1];
-							String num = splitLine[2];
-							int taskin = ptasks.indexOf(machines); 
-							int taskout = ptasks.indexOf(tasks); 
-							int theNum = Integer.parseInt(num);
-							if(taskin == -1 || taskout == -1 || theNum == -1) {
-								writer.println("Error: there are no such Characters");
-								System.exit(1);
-							}
-							String[] charArray = {machines,tasks,num};
-							tooNearPen.add(charArray);
-							line = br.readLine(); 
-							System.out.println(charArray);
-							//System.out.println("a");
-						}
-						//System.out.println("c");
-						line = br.readLine();
-						if (line == null){
-							//	System.out.println("f");
-								br.close();
-							}
-					}
-
-			
+		// Splitting the read line and adding 2 variables into the character array if the character is (
+		if(line.contains("forced partial assignment")) {
+			line = br.readLine();
+			//System.out.println(line);
+			int  i=0;
+			while(!line.isEmpty()) {
+				//System.out.println(line);
+				char[] splitline = line.toCharArray();
+				char machines  = splitline[1];
+				//System.out.println(machines);
+				char tasks = splitline[4];
+				//System.out.println(tasks);
+				int taskin = pmachine.indexOf(machines); 
+				//System.out.println(taskin);
+				int taskout = ptasks.indexOf(tasks); 
+				//System.out.println(taskout);
+				if(taskin == -1 || taskout == -1) {
+					writer.println("Error: there are no such Characters");
+					System.exit(1);
 				}
+				//System.out.print("a\n" );
+				char[] charArray = {machines,tasks};
+				//forcedPartial[forcedPartial.length] = charArray; 
+				//System.out.print("b\n" );
+				forcedPartial.add(charArray);
+				//System.out.print("c\n" );
+				System.out.println(charArray);
+				line = br.readLine(); 
+				//System.out.println(line);
+			}
+			line = br.readLine();
+			i++;
+			
+		}
+		// Splitting the read line and adding 2 variables into the character array if the character is (
+		else if(line.contains("forbidden machine")) {
+			line = br.readLine();
+			System.out.println("forbidden machine");
+			while(!line.isEmpty()) {
+				char[] splitline = line.toCharArray();
+				char machines  = splitline[1];
+				char tasks = splitline[4];
+				int taskin = pmachine.indexOf(machines); 
+				int taskout = ptasks.indexOf(tasks); 
+				if(taskin == -1 || taskout == -1) {
+					writer.println("Error: there are no such Characters");
+					System.exit(1);
+				}
+				char[] charArray = {machines,tasks};
+				forbiddenMachine.add(charArray);
 				
-		}	
+				line = br.readLine(); 
+				System.out.println(charArray);
+			}
+			line = br.readLine();
+		}
+		// Splitting the read line and adding 2 variables into the character array if the character is (
+		else if(line.contains("too-near tasks")) {
+			line = br.readLine();
+			System.out.println("too-near tasks");
+			while(!line.isEmpty()) {
+				char[] splitline = line.toCharArray();
+				char machines  = splitline[1];
+				//System.out.println(machines);
+				char tasks = splitline[4];
+				//System.out.println(machines);
+				int taskin =ptasks.indexOf(machines); 
+				int taskout = ptasks.indexOf(tasks); 
+				if(taskin == -1 || taskout == -1) {
+					writer.println("Error: there are no such Characters");
+					System.exit(1);
+				}
+				char[] charArray = {machines,tasks};
+				tooNear.add(charArray);
+				//System.out.println("a");
+				line = br.readLine();
+				System.out.println(charArray); 
+			}
+			line = br.readLine();
+			
 
+		}
+
+		// Splitting each line and adding all the characters into the array at point ij. 
+		else if (line.contains("machine penalties")) {
+			System.out.println("Machine penalties");
+			line = br.readLine();
+			int count = 0;
+			while(!line.isEmpty()) {
+				String[] splitted = line.split("\\s+");
+				int length = splitted.length;
+				if (splitted.length != 8) {
+					//TODO:file content error
+				}
+				for( int i = 0; i < 8; i++) {
+					
+					machinePen[count][i] = Integer.parseInt(splitted[i]);
+				}
+				line = br.readLine();
+				count++;
+			} 
+			line = br.readLine();
+			//System.out.println(charArrays);
+				
+				//System.out.print(machinePen[0][7]);
+				//System.out.println(line);		
+			System.out.println(machinePen[0][0]);
+			System.out.println(machinePen[1][1]);
+			System.out.println(machinePen[2][2]);
+			System.out.println(machinePen[3][3]);
+			System.out.println(machinePen[4][4]);
+		}
+		// Splitting the read line and adding 2 variables into the character array if the character is (
+		else if(line.contains("too-near penalties")) {
+			System.out.println("too-near penalties");
+			line = br.readLine();
+			while(line != null) {
+				//System.out.println(line);
+				line = line.replace(")", "");
+				line = line.replace("(", "");
+				line = line.replace(" ", "");
+				String[] splitLine = line.split(",");
+				//char[] splitline = line.toCharArray();
+				String machines  = splitLine[0];
+				String tasks = splitLine[1];
+				String num = splitLine[2];
+				int taskin = ptasks.indexOf(machines); 
+				int taskout = ptasks.indexOf(tasks); 
+				int theNum = Integer.parseInt(num);
+				if(taskin == -1 || taskout == -1 || theNum == -1) {
+					writer.println("Error: there are no such Characters");
+					System.exit(1);
+				}
+				String[] charArray = {machines,tasks,num};
+				tooNearPen.add(charArray);
+				line = br.readLine(); 
+				System.out.println(charArray);
+				//System.out.println("a");
+			}
+			//System.out.println("c");
+			line = br.readLine();
+			if (line == null){
+				//	System.out.println("f");
+					br.close();
+				}
+		}
+
+		line = br.readLine();
+	}
 }
 	
