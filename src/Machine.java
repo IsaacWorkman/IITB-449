@@ -8,7 +8,7 @@ public class Machine {
     public int name() {return this.name;}
     
     //ordered list of possible tasks for given machine
-    public ArrayList<Task> sortedList;
+    public ArrayList<Task> sortedList = new ArrayList<Task>();
     private Task[] taskList = new Task[8];
     
     //constructor assigns name, makes the tasklist, and populates it (size 8)

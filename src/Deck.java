@@ -39,7 +39,7 @@ public class Deck {
                 outputError(errorOccured, outputFile);
                 return;
             }
-            boolean executed = sortedDeck.get(pair[machineIndex]).forcedAssign(pair[1]);
+            boolean executed = sortedDeck.get(machineIndex).forcedAssign(pair[1]);
             if (!executed) {
                 errorOccured = 1;
                 outputError(errorOccured, outputFile);
