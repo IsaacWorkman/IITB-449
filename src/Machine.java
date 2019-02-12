@@ -29,7 +29,7 @@ public class Machine {
      */
     public boolean forcedAssign(char taskKeep) {
         boolean executed = false;
-        int index = Character.getNumericValue(taskKeep);
+        int index = Character.getNumericValue(taskKeep)-10; // Shift taskkeep relative to index 0
         if (taskList.length > 1) {
             Task toKeep = taskList[index];
             sortedList.add(toKeep);

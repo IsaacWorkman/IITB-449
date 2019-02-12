@@ -88,13 +88,13 @@ public class Input{
 							//System.out.println(line);
 							char[] splitline = line.toCharArray();
 							char machines  = splitline[1];
-							System.out.println(machines);
+							//System.out.println(machines);
 							char tasks = splitline[4];
-							System.out.println(tasks);
+							//System.out.println(tasks);
 							int taskin = pmachine.indexOf(machines); 
-							System.out.println(taskin);
+							//System.out.println(taskin);
 							int taskout = ptasks.indexOf(tasks); 
-							System.out.println(taskout);
+							//System.out.println(taskout);
 							if(taskin == -1 || taskout == -1) {
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
