@@ -166,7 +166,7 @@ public class Input{
 					else if (line.contains("machine penalties")) {
 						System.out.println("Machine penalties");
 						line = br.readLine();
-						String[] splited = line.split("(" + ")" + ",");
+						String[] splited = line.split("\\s+");
 						int length = splited.length;
 
 						for(int i = 0; i < length; i++){
@@ -177,7 +177,7 @@ public class Input{
 								int num = Integer.parseInt(splited[i]);
 							}
 							catch(Exception e) {
-								System.out.println("Error:");
+								System.out.println("Error in Machine Penalties:");
 								System.out.println(e);
 							}
 
@@ -213,7 +213,7 @@ public class Input{
 							//System.out.print(machinePen[0][7]);
 							//System.out.println(line);		
 						}
-						line = br.readLine();
+						/*line = br.readLine();
 						//System.out.println("error1");
 						line1 = line.replaceAll("\\s+", "");
 						//System.out.println("error2");
@@ -231,7 +231,7 @@ public class Input{
 								System.out.println("error");
 								System.exit(1);
 							}
-						}
+						}*/
 		
 
 						//System.out.print(machinePen[2][1]);
@@ -246,7 +246,7 @@ public class Input{
 						System.out.println(machinePen[1][1]);
 						System.out.println(machinePen[2][2]);
 						System.out.println(machinePen[3][3]);
-						System.out.println(machinePen[4][5]);
+						System.out.println(machinePen[4][4]);
 
 					}
 					// Splitting the read line and adding 2 variables into the character array if the character is (
