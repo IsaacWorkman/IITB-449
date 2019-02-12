@@ -166,26 +166,25 @@ public class Input{
 					else if (line.contains("machine penalties")) {
 						System.out.println("Machine penalties");
 						line = br.readLine();
-						//System.out.println("error1");
-						String line1 = line.replaceAll("\\s+", "");
-						//System.out.println("error2");
-						String kmachine = "012345678";
-						//System.out.println("error3");
-						char[] splitline = line1.toCharArray();
-						//System.out.println("error4");
-						for(int i = 0; i<8; i++){
-						//	System.out.println("error");
-							char machines  = splitline[i];
-						//	System.out.println("error1");
-							int taskin = kmachine.indexOf(machines); 
-						//	System.out.println("error2");
-							if(taskin == -1) {
-								writer.println("Error: there are no such Characters");
-								System.out.println("error");
-								System.exit(1);
+						String[] splited = line.split("\\s+");
+						int length = splited.length;
+
+						for(int i = 0; i < length; i++){
+							if (splited[i] == "(" || splited[i] == ")" || splited[i] == ","){
+
 							}
+							try{
+								int num = Integer.parseInt(splited[i]);
+							}
+							catch(Exception e) {
+								System.out.println("Error in Machine Penalties:");
+								System.out.println(e);
+							}
+
+
 						}
-		
+
+
 						char[] charArrays = new char[line.length()];
 						//System.out.println(line.length());
 						line = line.replaceAll("\\s+", "");
@@ -214,7 +213,7 @@ public class Input{
 							//System.out.print(machinePen[0][7]);
 							//System.out.println(line);		
 						}
-						line = br.readLine();
+						/*line = br.readLine();
 						//System.out.println("error1");
 						line1 = line.replaceAll("\\s+", "");
 						//System.out.println("error2");
@@ -232,14 +231,13 @@ public class Input{
 								System.out.println("error");
 								System.exit(1);
 							}
-						}
+						}*/
 		
 
 						//System.out.print(machinePen[2][1]);
 						/*for (int k=0; k<=7; k++){
 								for (int h=0; h<=7; h++){
 									System.out.print(machinePen[k][h]);
-
 								}
 						}*/
 
@@ -248,27 +246,22 @@ public class Input{
 						System.out.println(machinePen[1][1]);
 						System.out.println(machinePen[2][2]);
 						System.out.println(machinePen[3][3]);
-						System.out.println(machinePen[4][5]);
+						System.out.println(machinePen[4][4]);
+						line = br.readLine();
 
 					}
 					// Splitting the read line and adding 2 variables into the character array if the character is (
 					else if(line.contains("too-near penalties")) {
 						System.out.println("too-near penalties");
 						line = br.readLine();
-						//System.out.println(line+"!");
 						while(line != null) {
-							//System.out.println("d");
 							char[] splitline = line.toCharArray();
 							char machines  = splitline[1];
 							char tasks = splitline[4];
 							char num = splitline[7];
-							//System.out.println(num);
 							int taskin = ptasks.indexOf(machines); 
 							int taskout = ptasks.indexOf(tasks); 
 							int theNum = pmachine.indexOf(num);
-							//System.out.println(taskin);
-							//System.out.println(taskout);
-							//System.out.println(theNum);
 							if(taskin == -1 || taskout == -1 || theNum == -1) {
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
@@ -293,5 +286,4 @@ public class Input{
 		}	
 
 }
-			
-
+	
