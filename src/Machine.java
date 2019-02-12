@@ -47,16 +47,17 @@ public class Machine {
     /*
      * attempts to remove specified forbidden task from task list
      */
-    public boolean forbiddenTask(int toRemove) {
+    public boolean forbiddenTask(char toRemove) {
         boolean executed = false;
         if (taskList.length == 1) {
-            if (taskList[0].getNumber() != toRemove){
+            if (taskList[0].getName() != toRemove){
                 executed = true;
             }
         }
        
         else {
-            taskList[toRemove] = null;
+            int index = Character.getNumericValue(taskKeep)-10;
+            taskList[index] = null;
             executed = true;
         }
         return executed;

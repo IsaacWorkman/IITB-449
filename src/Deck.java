@@ -55,7 +55,7 @@ public class Deck {
         for (int i = 0; i < ourInput.forbiddenMachine.size(); i++) {
             char[] pair = ourInput.forbiddenMachine.get(i);
             machineIndex = Character.getNumericValue(pair[0]) -1;
-            boolean executed = sortedDeck.get(machineIndex).forbiddenTask(Character.getNumericValue(pair[1]));
+            boolean executed = sortedDeck.get(machineIndex).forbiddenTask(pair[1]);
             if (!executed) {
                 errorOccured = 2;
                 outputError(errorOccured, outputFile);
