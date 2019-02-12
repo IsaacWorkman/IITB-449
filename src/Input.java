@@ -88,7 +88,7 @@ public class Input{
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
                 //System.out.println(machines);
-                char tasks = splitline[4];
+                char tasks = splitline[3];
                 //System.out.println(tasks);
                 int taskin = pmachine.indexOf(machines); 
                 //System.out.println(taskin);
@@ -116,7 +116,7 @@ public class Input{
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
                 //System.out.println(machines);
-                char tasks = splitline[4];
+                char tasks = splitline[3];
                 //System.out.println(tasks);
                 int taskin = pmachine.indexOf(machines); 
                 //System.out.println(taskin);
@@ -143,7 +143,7 @@ public class Input{
                     char[] splitline = line.toCharArray();
                     char machines  = splitline[1];
                     //System.out.println(machines);
-                    char tasks = splitline[4];
+                    char tasks = splitline[3];
                     //System.out.println(machines);
                     int taskin =ptasks.indexOf(machines); 
                     int taskout = ptasks.indexOf(tasks); 
