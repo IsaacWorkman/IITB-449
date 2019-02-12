@@ -46,7 +46,7 @@ public class Deck {
                 outputError(errorOccured, outputFile);
                 return;
             }
-            assigned.add(pair[i]);
+            assigned.add(pair[1]);
         }
         /*
          * iterates through forbidden machines array and attempts to 
