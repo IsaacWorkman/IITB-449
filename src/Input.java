@@ -247,6 +247,7 @@ public class Input{
 						System.out.println(machinePen[2][2]);
 						System.out.println(machinePen[3][3]);
 						System.out.println(machinePen[4][4]);
+						line = br.readLine();
 
 					}
 					// Splitting the read line and adding 2 variables into the character array if the character is (
