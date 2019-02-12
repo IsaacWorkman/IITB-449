@@ -78,6 +78,93 @@ public class Input{
 		}
 		Name = line;
 		
+        while(line.isEmpty()) {
+            line = br.readLine();
+        }
+        if (line.contains("forced partial assignment:")) {
+            line = br.readLine();
+            while(!line.contains("forced partial assignment:")) {
+                //System.out.println(line);
+                char[] splitline = line.toCharArray();
+                char machines  = splitline[1];
+                //System.out.println(machines);
+                char tasks = splitline[4];
+                //System.out.println(tasks);
+                int taskin = pmachine.indexOf(machines); 
+                //System.out.println(taskin);
+                int taskout = ptasks.indexOf(tasks); 
+                //System.out.println(taskout);
+                if(taskin == -1 || taskout == -1) {
+                    writer.println("Error: there are no such Characters");
+                    System.exit(1);
+                }
+                //System.out.print("a\n" );
+                char[] charArray = {machines,tasks};
+                //forcedPartial[forcedPartial.length] = charArray; 
+                //System.out.print("b\n" );
+                forcedPartial.add(charArray);
+                //System.out.print("c\n" );
+                System.out.println(charArray);
+                line = br.readLine(); 
+                //System.out.println(line);
+            }
+            }
+            if (line.contains("forbidden machine:")) {
+                line = br.readLine();
+                while(!line.contains("too-near tasks:")) {
+                    //System.out.println(line);
+                    char[] splitline = line.toCharArray();
+                    char machines  = splitline[1];
+                    //System.out.println(machines);
+                    char tasks = splitline[4];
+                    //System.out.println(tasks);
+                    int taskin = pmachine.indexOf(machines); 
+                    //System.out.println(taskin);
+                    int taskout = ptasks.indexOf(tasks); 
+                    //System.out.println(taskout);
+                    if(taskin == -1 || taskout == -1) {
+                        writer.println("Error: there are no such Characters");
+                        System.exit(1);
+                    }
+                    //System.out.print("a\n" );
+                    char[] charArray = {machines,tasks};
+                    //forcedPartial[forcedPartial.length] = charArray; 
+                    //System.out.print("b\n" );
+                    forcedPartial.add(charArray);
+                    //System.out.print("c\n" );
+                    System.out.println(charArray);
+                    line = br.readLine(); 
+                    //System.out.println(line);
+                }
+                if (line.contains("too-near tasks:")) {
+                    line = br.readLine();
+                    System.out.println("too-near tasks");
+                    while(!line.contains("machine penalties:")) {
+                        char[] splitline = line.toCharArray();
+                        char machines  = splitline[1];
+                        //System.out.println(machines);
+                        char tasks = splitline[4];
+                        //System.out.println(machines);
+                        int taskin =ptasks.indexOf(machines); 
+                        int taskout = ptasks.indexOf(tasks); 
+                        if(taskin == -1 || taskout == -1) {
+                            writer.println("Error: there are no such Characters");
+                            System.exit(1);
+                        }
+                        char[] charArray = {machines,tasks};
+                        tooNear.add(charArray);
+                        //System.out.println("a");
+                        line = br.readLine();
+                        System.out.println(charArray); 
+                    }
+                    if (line.contains("too-near penalties:")) {
+                        
+                    }
+                }
+
+            }
+        }   
+		
 		//Jess's Stuff goes after here
 
 		// Splitting the read line and adding 2 variables into the character array if the character is (
