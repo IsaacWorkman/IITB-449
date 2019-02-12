@@ -12,12 +12,12 @@ public class Machine {
     private Task[] taskList = new Task[8];
     
     //constructor assigns name, makes the tasklist, and populates it (size 8)
-    public Machine(int number, char[][] penalties, ArrayList<String[]> tooNear) {
+    public Machine(int number, String[][] penalties, ArrayList<String[]> tooNear) {
         
         name = number;
         char taskName = 'A';
         for (int i = 0; i < 8; i++, taskName++) {
-            taskList[i] = new Task(i, taskName, (int)penalties[name-1][i], tooNear);
+            taskList[i] = new Task(i, taskName, Integer.parseInt(penalties[number][i]), tooNear);
         }
     }
     
