@@ -26,6 +26,7 @@ public class Deck {
         for (int i = 1; i <= 8; i++) {
             sortedDeck.add(new Machine(i, ourInput.machinePen, ourInput.tooNearPen));
         }
+  
         /*
          * iterates through forced assignments array and attempts to 
          * force the assignment. if an error occurred executed will return false and 

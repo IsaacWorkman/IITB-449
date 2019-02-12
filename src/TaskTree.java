@@ -44,14 +44,14 @@ public class TaskTree {
 			int currentPenalty = calculatePenalty(currentNode);
 			System.out.println("Jess says put this here: current penalty = " + currentPenalty);
 			// halt on branches exceeding the current best penalty score.
-//			
-//			if (!penaltySet && (currentNode.getDepth() == 7)) {
-//				this.lowestPenalty = currentPenalty;
-//				penaltySet = true;
-//			}
-//			if (currentPenalty > this.lowestPenalty) {
-//				break;
-//			}
+			
+			if (!penaltySet && (currentNode.getDepth() == 7)) {
+				this.lowestPenalty = currentPenalty;
+				penaltySet = true;
+			}
+			if (currentPenalty > this.lowestPenalty) {
+				return;
+			}
 			// updates bestNode if node is a leaf and has a lower penalty score
 			if ((currentPenalty < this.lowestPenalty) && (currentNode.getDepth() == 7)) {
 				this.lowestPenalty = currentPenalty;
@@ -63,9 +63,11 @@ public class TaskTree {
 			if (currentNode.getDepth() != -1) {
 				usedTasks.add(currentNode.getTask().getName());
 			}
-			//Retrieves an ArrayList of eligible tasks for the next machine. Assumes it is sorted.
+			//Retrieves an ArrayList of eligible tasks for the next machine. Assumes it is sorted
+			if (currentNode.getDepth() == 7) {return;}
 			@SuppressWarnings("unchecked")
 			ArrayList<Task> toCheck	 = (ArrayList<Task>) this.deck.sortedDeck.get(currentNode.getDepth()+1).sortedList.clone();
+		
 			//Removes invalid tasks, such as bad neighbours or tasks that have already been assigned.
 			@SuppressWarnings("unchecked")
 			ArrayList<Task> keptTasks = (ArrayList<Task>) toCheck.clone();
@@ -91,12 +93,7 @@ public class TaskTree {
 			for (TaskNode child : currentNode.getChildren()) {
 				findPairs(child);
 			}
-//			for(TaskNode alpha : currentNode.getChildren()) {
-//				System.out.print(alpha.getName() + " ");
-//			}
-			System.out.println();
 			if (currentNode.getDepth() != -1) {
-				//System.out.println("Hello jess! : " + currentNode.getTask().getName());
 				usedTasks.remove((Character) currentNode.getTask().getName());
 			}
 		}

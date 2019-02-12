@@ -67,15 +67,18 @@ public class Machine {
      * sorts array in terms of lowest penalty first
      */
     public void sortedQueue() {
+    	
         if (sortedList.size() != 1) {
             PriorityQueue<Task> temp = new PriorityQueue<Task>(taskList.length, (a,b)->a.getPenalty() - b.getPenalty());
+            
             for (int i = 0; i < taskList.length; i++) {
                 if (taskList[i] != null) {
                     temp.add(taskList[i]);
                 }
             }
-            for (int i = 0; i < temp.size(); i++) {
-                sortedList.add(temp.remove());
+            int bound = temp.size();
+            for (int i = 0; i < bound - 1; i++) {
+                sortedList.add(temp.poll());
             }
         }
         
