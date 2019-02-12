@@ -7,8 +7,11 @@ public class Main {
 	public static void main(String[] args) {
 		
 		try{
+			System.out.println("Getting input!");
 			Input ourInput = new Input(args);
+			System.out.println("Processing deck!");
 			Deck ourDeck = new Deck(ourInput, args[1]);
+			System.out.println("Creating tree!");
 			TaskTree myTree = new TaskTree(ourDeck, ourInput.tooNearPen);
 			System.out.println("lowest penalty: " + myTree.getPenalty());
 		}

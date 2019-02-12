@@ -11,10 +11,10 @@ public class TaskTree {
 	private int lowestPenalty;
 	private TaskNode root = new TaskNode();
 	private ArrayList<Character> usedTasks = new ArrayList<Character>();
-	private ArrayList<char[]> tooNearPenalty;
+	private ArrayList<String[]> tooNearPenalty;
 
 	//TODO: Add implementation to constructor method to receive massaged input data. (Aka the "kingdex")
-	public TaskTree(Deck deck, ArrayList<char[]> tooNearPenalty) {
+	public TaskTree(Deck deck, ArrayList<String[]> tooNearPenalty) {
 		this.deck = deck;
 		this.tooNearPenalty = tooNearPenalty;
 		findPairs(root);

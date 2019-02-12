@@ -9,7 +9,7 @@ public class Input{
 	public ArrayList<char[]> forcedPartial = new ArrayList<char[]>();
 	public ArrayList<char[]> forbiddenMachine = new ArrayList<char[]>() ;
 	public ArrayList<char[]> tooNear = new ArrayList<char[]>();
-	public ArrayList<char[]> tooNearPen = new ArrayList<char[]>();
+	public ArrayList<String[]> tooNearPen = new ArrayList<String[]>();
 	public char machinePen[][] = new char[8][8]; // Since size is already known make double array
 
 	public Input(String[] args) throws IOException{
@@ -255,18 +255,23 @@ public class Input{
 						System.out.println("too-near penalties");
 						line = br.readLine();
 						while(line != null) {
-							char[] splitline = line.toCharArray();
-							char machines  = splitline[1];
-							char tasks = splitline[4];
-							char num = splitline[7];
+							//System.out.println(line);
+							line = line.replace(")", "");
+							line = line.replace("(", "");
+							line = line.replace(",", "");
+							String[] splitLine = line.split("\\s+");
+							//char[] splitline = line.toCharArray();
+							String machines  = splitLine[0];
+							String tasks = splitLine[1];
+							String num = splitLine[2];
 							int taskin = ptasks.indexOf(machines); 
 							int taskout = ptasks.indexOf(tasks); 
-							int theNum = pmachine.indexOf(num);
+							int theNum = Integer.parseInt(num);
 							if(taskin == -1 || taskout == -1 || theNum == -1) {
 								writer.println("Error: there are no such Characters");
 								System.exit(1);
 							}
-							char[] charArray = {machines,tasks,num};
+							String[] charArray = {machines,tasks,num};
 							tooNearPen.add(charArray);
 							line = br.readLine(); 
 							System.out.println(charArray);

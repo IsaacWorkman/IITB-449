@@ -7,16 +7,16 @@ public class Task {
     int penaltyValue; //value for tree calculations
     private char name; //Task's name
     private int number;
-    ArrayList<char[]> tooNearPartners = new ArrayList<char[]>();
+    ArrayList<String[]> tooNearPartners = new ArrayList<String[]>();
     
     //Constructor 
-    public Task(int num, char taskName, int penalty, ArrayList<char[]> tooNear) {
+    public Task(int num, char taskName, int penalty, ArrayList<String[]> tooNear) {
     	taskName = name;
         number = num;
         penaltyValue = penalty;
         for (int i = 0; i < tooNear.size(); i++) {
-            if (tooNear.get(i)[0] == taskName) {
-                char[] tooNearPair = {tooNear.get(i)[1], tooNear.get(i)[2]};
+            if (tooNear.get(i)[0].charAt(0) == taskName) {
+                String[] tooNearPair = {tooNear.get(i)[1], tooNear.get(i)[2]};
                 tooNearPartners.add(tooNearPair);
             }
         }
@@ -28,10 +28,10 @@ public class Task {
     
     public int getNumber() {return number;}
     
-    public int getTooNearPenalty(char tooNearName) {
+    public int getTooNearPenalty(String tooNearName) {
         for (int i = 0; i < tooNearPartners.size(); i++) {
             if (tooNearPartners.get(i)[0] == tooNearName) {
-                return Character.getNumericValue(tooNearPartners.get(i)[1]);
+                return Integer.parseInt(tooNearPartners.get(i)[1]);
             }
         }
         return 0;
