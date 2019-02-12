@@ -85,7 +85,12 @@ public class Input{
         if (line.contains("forced partial assignment:") && (line.replace(" ", "").equals("forcedpartialassignment:"))) {
             System.out.println("hi");
             line = br.readLine();
+
             while(!line.contains("forbidden machine:")) {
+            	if (line.isEmpty()) {
+            		line = br.readLine();
+            		continue;
+            	}
                 //System.out.println(line);
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
@@ -115,6 +120,10 @@ public class Input{
             line = br.readLine();
             while(!line.contains("too-near tasks:")) {
                 //System.out.println(line);
+            	if (line.isEmpty()) {
+            		line = br.readLine();
+            		continue;
+            	}
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
                 //System.out.println(machines);
@@ -141,7 +150,12 @@ public class Input{
             if (line.contains("too-near tasks:") && (line.replace(" ", "").equals("too-neartasks:"))) {
                 line = br.readLine();
                 System.out.println("too-near tasks");
+
                 while(!line.contains("machine penalties:")) {
+                	if (line.isEmpty()) {
+                		line = br.readLine();
+                		continue;
+                	}
                     char[] splitline = line.toCharArray();
                     char machines  = splitline[1];
                     //System.out.println(machines);
@@ -162,8 +176,14 @@ public class Input{
                 if (line.contains("machine penalties:") && (line.replace(" ", "").equals("machinepenalties:"))) {
                     line = br.readLine();
                     int count = 0;
-                    while(!line.contains("too-near penalties:")) {
+                    System.out.println("machine penalties");
+                    while(!line.contains("too-near penalties")) {
+                    	if (line.isEmpty()) {
+                    		line = br.readLine();
+                    		continue;
+                    	}
                         String[] splitted = line.split("\\s+");
+                        //System.out.println(splitted[0]);
                         int length = splitted.length;
                         if (splitted.length != 8) {
                             //TODO:file content error
@@ -177,7 +197,12 @@ public class Input{
                     }
                     if (line.contains("too-near penalties") && (line.replace(" ", "").equals("too-nearpenalties"))) {
                         line = br.readLine();
+                        System.out.println("too-near penalties");
                         while(line != null) {
+                        	if (line.isEmpty()) {
+                        		line = br.readLine();
+                        		continue;
+                        	}
                             //System.out.println(line);
                             line = line.replace(")", "");
                             line = line.replace("(", "");
