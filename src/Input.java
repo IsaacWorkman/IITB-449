@@ -78,100 +78,13 @@ public class Input{
 		}
 		Name = line;
 		
-        while(line.isEmpty()) {
-            line = br.readLine();
-        }
-        if (line.contains("forced partial assignment:")) {
-            line = br.readLine();
-            while(!line.contains("forced partial assignment:")) {
-                //System.out.println(line);
-                char[] splitline = line.toCharArray();
-                char machines  = splitline[1];
-                //System.out.println(machines);
-                char tasks = splitline[4];
-                //System.out.println(tasks);
-                int taskin = pmachine.indexOf(machines); 
-                //System.out.println(taskin);
-                int taskout = ptasks.indexOf(tasks); 
-                //System.out.println(taskout);
-                if(taskin == -1 || taskout == -1) {
-                    writer.println("Error: there are no such Characters");
-                    System.exit(1);
-                }
-                //System.out.print("a\n" );
-                char[] charArray = {machines,tasks};
-                //forcedPartial[forcedPartial.length] = charArray; 
-                //System.out.print("b\n" );
-                forcedPartial.add(charArray);
-                //System.out.print("c\n" );
-                System.out.println(charArray);
-                line = br.readLine(); 
-                //System.out.println(line);
-            }
-            }
-            if (line.contains("forbidden machine:")) {
-                line = br.readLine();
-                while(!line.contains("too-near tasks:")) {
-                    //System.out.println(line);
-                    char[] splitline = line.toCharArray();
-                    char machines  = splitline[1];
-                    //System.out.println(machines);
-                    char tasks = splitline[4];
-                    //System.out.println(tasks);
-                    int taskin = pmachine.indexOf(machines); 
-                    //System.out.println(taskin);
-                    int taskout = ptasks.indexOf(tasks); 
-                    //System.out.println(taskout);
-                    if(taskin == -1 || taskout == -1) {
-                        writer.println("Error: there are no such Characters");
-                        System.exit(1);
-                    }
-                    //System.out.print("a\n" );
-                    char[] charArray = {machines,tasks};
-                    //forcedPartial[forcedPartial.length] = charArray; 
-                    //System.out.print("b\n" );
-                    forcedPartial.add(charArray);
-                    //System.out.print("c\n" );
-                    System.out.println(charArray);
-                    line = br.readLine(); 
-                    //System.out.println(line);
-                }
-                if (line.contains("too-near tasks:")) {
-                    line = br.readLine();
-                    System.out.println("too-near tasks");
-                    while(!line.contains("machine penalties:")) {
-                        char[] splitline = line.toCharArray();
-                        char machines  = splitline[1];
-                        //System.out.println(machines);
-                        char tasks = splitline[4];
-                        //System.out.println(machines);
-                        int taskin =ptasks.indexOf(machines); 
-                        int taskout = ptasks.indexOf(tasks); 
-                        if(taskin == -1 || taskout == -1) {
-                            writer.println("Error: there are no such Characters");
-                            System.exit(1);
-                        }
-                        char[] charArray = {machines,tasks};
-                        tooNear.add(charArray);
-                        //System.out.println("a");
-                        line = br.readLine();
-                        System.out.println(charArray); 
-                    }
-                    if (line.contains("too-near penalties:")) {
-                        
-                    }
-                }
-
-            }
-        }   
-		
 		//Jess's Stuff goes after here
 
 		// Splitting the read line and adding 2 variables into the character array if the character is (
-		if(line.contains("forced partial assignment")) {
+		if(line.contains("forced partial assignment:") && (line.replace(" ", "").equals("forcedpartialassignment:"))) {
 			line = br.readLine();
 			//System.out.println(line);
-			int  i=0;
+			
 			while(!line.isEmpty()) {
 				//System.out.println(line);
 				char[] splitline = line.toCharArray();
@@ -198,11 +111,9 @@ public class Input{
 				//System.out.println(line);
 			}
 			line = br.readLine();
-			i++;
-			
 		}
 		// Splitting the read line and adding 2 variables into the character array if the character is (
-		else if(line.contains("forbidden machine")) {
+		else if(line.contains("forbidden machine:") && (line.replace(" ", "").equals("forbiddenmachine:"))) {
 			line = br.readLine();
 			System.out.println("forbidden machine");
 			while(!line.isEmpty()) {
@@ -224,7 +135,7 @@ public class Input{
 			line = br.readLine();
 		}
 		// Splitting the read line and adding 2 variables into the character array if the character is (
-		else if(line.contains("too-near tasks")) {
+		else if(line.contains("too-near tasks:") && (line.replace(" ", "").equals("too-neartasks:"))) {
 			line = br.readLine();
 			System.out.println("too-near tasks");
 			while(!line.isEmpty()) {
@@ -251,7 +162,7 @@ public class Input{
 		}
 
 		// Splitting each line and adding all the characters into the array at point ij. 
-		else if (line.contains("machine penalties")) {
+		else if (line.contains("machine penalties:") && (line.replace(" ", "").equals("machinepenalties:"))) {
 			System.out.println("Machine penalties");
 			line = br.readLine();
 			int count = 0;
@@ -280,7 +191,7 @@ public class Input{
 			System.out.println(machinePen[4][4]);
 		}
 		// Splitting the read line and adding 2 variables into the character array if the character is (
-		else if(line.contains("too-near penalties")) {
+		else if(line.contains("too-near penalties") && (line.replace(" ", "").equals("too-nearpenalties"))) {
 			System.out.println("too-near penalties");
 			line = br.readLine();
 			while(line != null) {
