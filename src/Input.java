@@ -104,10 +104,17 @@ public class Input{
                     writer.close();
                     System.exit(1);
                 }
+                try {
                 if(splitline[0] != '(' || splitline[2] == ',' || splitline[4] == ')') {
                 	 writer.println("Error: There are Characters missing");
                 	 writer.close();
                      System.exit(1);
+                	}
+                }
+                catch(ArrayIndexOutOfBoundsException e) {
+               	 	writer.println("Error: Missing Character");
+               	 	writer.close();
+                    System.exit(1);
                 }
                 char[] charArray = {machines,tasks};
                 forcedPartial.add(charArray);
@@ -172,12 +179,19 @@ public class Input{
                         writer.close();
                         System.exit(1);
                     }
+                    try {
                     if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
                    	 	writer.println("Error: There are Characters missing");
                    	 	writer.close();
                    	 	System.exit(1);
                         
                    }
+                    }
+                    catch(ArrayIndexOutOfBoundsException e) {
+                   	 	writer.println("Error: Character Missing");
+                   	 	writer.close();
+                        System.exit(1);
+                    }
                     char[] charArray = {machines,tasks};
                     tooNear.add(charArray);
                     line = br.readLine();
