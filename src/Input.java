@@ -184,7 +184,7 @@ public class Input{
 
                     //There are no such characters error
                     if(taskin == -1 || taskout == -1) {
-                        writer.println("Error while parsing input file");
+                        writer.println("invalid machine/task");
                         writer.close();
                         System.exit(0);
                     }
@@ -225,17 +225,31 @@ public class Input{
                     	}
                     	//There are characters missing error
                         String[] splitted = line.split("\\s+");
-                        int length = splitted.length;
-                        if (splitted.length != 8) {
-                         	 writer.println("Error while parsing input file");
-                          	 writer.close();
-                             System.exit(0);        	
-                        }
                         for( int i = 0; i < 8; i++) {
-                            machinePen[count][i] = Integer.parseInt(splitted[i]);
+                            try {
+                                machinePen[count][i] = Integer.parseInt(splitted[i]);
+                                if (machinePen[count][i] < 0) {
+                                    throw new NumberFormatException();
+                                }
+                            }
+                            catch(ArrayIndexOutOfBoundsException e) {
+                                writer.println("machine penalty error");
+                                writer.close();
+                                System.exit(0);
+                            }
+                            catch (NumberFormatException nfe){
+                                writer.write("invalid penalty");
+                                writer.close();
+                                System.exit(0);
+                            }
                         }
                         line = br.readLine();
                         count++;
+                    }
+                    if (count != 8) {
+                        writer.println("machine penalty error");
+                        writer.close();
+                        System.exit(0);
                     }
                     //The name of previous not in file error
                     if (line.contains("too-near penalties") && (line.replace(" ", "").equals("too-nearpenalties"))) {
@@ -272,6 +286,9 @@ public class Input{
                             int taskout = ptasks.indexOf(tasks); 
                             try {
                             	int theNum = Integer.parseInt(num);
+                            	if (theNum < 0) {
+                            	    throw new NumberFormatException();
+                            	}
                             }
                             catch (NumberFormatException e) {
                             	writer.write("invalid penalty");

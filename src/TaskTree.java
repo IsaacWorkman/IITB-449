@@ -2,7 +2,6 @@
 //30005845
 
 import java.util.ArrayList;
-import java.util.Arrays;
 public class TaskTree {
 	//List of available tasks. Note that this must be in the form of Strings, as TaskNodes are reserved for tree construction.
 	//Note that tasks and TaskNodes are separate and not interchangeable.
@@ -11,14 +10,12 @@ public class TaskTree {
 	private int lowestPenalty = Integer.MAX_VALUE;
 	private TaskNode root = new TaskNode();
 	private ArrayList<Character> usedTasks = new ArrayList<Character>();
-	private ArrayList<String[]> tooNearPenalty;
 	//boolean penaltySet = false;
 	private TaskNode topNode;
 	private Input ourInput;
 	//TODO: Add implementation to constructor method to receive massaged input data. (Aka the "kingdex")
 	public TaskTree(Deck deck, Input ourInput) {
 		this.deck = deck;
-		this.tooNearPenalty = ourInput.tooNearPen;
 		this.ourInput = ourInput;
 		findPairs(root);
 	}
