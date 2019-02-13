@@ -22,6 +22,7 @@ public class Input{
         File outputFile = null;
 
         String Name = "";
+        String Previous = "";
         String ptasks = "ABCDEFGH";
         String pmachine = "12345678";
 
@@ -77,15 +78,20 @@ public class Input{
             line = br.readLine();
         }
         Name = line;
-        
+        Previous = "Name";
         line = br.readLine();
         while(line.isEmpty()) {
             line = br.readLine();
         }
         if (line.contains("forced partial assignment:") && (line.replace(" ", "").equals("forcedpartialassignment:"))) {
-            System.out.println("forced partial assignment:");
+            if(Previous != "Name") {
+                writer.println("Error: The name of previous not in file");
+                System.exit(1);
+            }
+        	System.out.println("forced partial assignment:");
+        	Previous = "forced partial assignment";
             line = br.readLine();
-
+            
             while(!line.contains("forbidden")) {
             	if (line.isEmpty()) {
             		line = br.readLine();
@@ -121,8 +127,14 @@ public class Input{
             }
         }
         if (line.contains("forbidden machine:") && (line.replace(" ", "").equals("forbiddenmachine:"))) {
+            if(Previous != "forced partial assignment" ) {
+                writer.println("Error: The name of previous not in file");
+                System.exit(1);
+            }
         	System.out.println("forbidden machine");
+        	Previous = "forbidden machine";
             line = br.readLine();
+             
             while(!line.contains("too-near tasks:")) {
                 //System.out.println(line);
             	if (line.isEmpty()) {
@@ -157,9 +169,15 @@ public class Input{
                 //System.out.println(line);
             }
             if (line.contains("too-near tasks:") && (line.replace(" ", "").equals("too-neartasks:"))) {
-                line = br.readLine();
+                if(Previous != "forbidden machine" ) {
+                    writer.println("Error: The name of previous not in file");
+                    System.exit(1);
+                }
+            	line = br.readLine();
                 System.out.println("too-near tasks");
+                Previous = "too-near tasks";
 
+                
                 while(!line.contains("machine penalties:")) {
                 	if (line.isEmpty()) {
                 		line = br.readLine();
@@ -187,9 +205,15 @@ public class Input{
                     System.out.println(charArray); 
                 }
                 if (line.contains("machine penalties:") && (line.replace(" ", "").equals("machinepenalties:"))) {
-                    line = br.readLine();
+                    if(Previous != "too-near tasks" ) {
+                        writer.println("Error: The name of previous not in file");
+                        System.exit(1);
+                    }
+                	line = br.readLine();
                     int count = 0;
                     System.out.println("machine penalties");
+                    Previous = "machine penalties";
+                    
                     while(!line.contains("too-near penalties")) {
                     	if (line.isEmpty()) {
                     		line = br.readLine();
@@ -210,8 +234,14 @@ public class Input{
                         count++;
                     }
                     if (line.contains("too-near penalties") && (line.replace(" ", "").equals("too-nearpenalties"))) {
-                        line = br.readLine();
+                        if(Previous != "machine penalties" ) {
+                            writer.println("Error: The name of previous not in file");
+                            System.exit(1);
+                        }
+                        
+                    	line = br.readLine();
                         System.out.println("too-near penalties");
+                        Previous = "too-near penalties";
                         while(line != null) {
                         	if (line.isEmpty()) {
                         		line = br.readLine();
