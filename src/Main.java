@@ -18,12 +18,12 @@ public class Main {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			writer.write("Solution ");
+			writer.write("Solution");
 			while (currentNode.getDepth()!= -1) {
-				writer.write(currentNode.getTask().getName() + " ");
+				writer.write(" " + currentNode.getTask().getName());
 				currentNode = currentNode.getParent();
 			}
-			writer.write("Quality:" + myTree.getPenalty());
+			writer.write("; Quality: " + myTree.getPenalty());
 			writer.close();
 			
 		}

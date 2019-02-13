@@ -30,15 +30,15 @@ public class Input{
         if(args.length < 2){
             // NOTE: This is assuming that the single output file will only be the input file
             writer = new PrintWriter("outputfile.txt", "UTF-8");
-            writer.println("Error, Missing File");
+            writer.println("Error while parsing input file");
             writer.close();
             System.exit(1);
         }
-
+        //Too many arguments error
         if(args.length > 2){
             // NOTE: This is assuming that the single output file will only be the input file
             writer = new PrintWriter(outputFile, "UTF-8");
-            writer.println("Error, Too many Files given");
+            writer.println("Error while parsing input file");
             writer.close();
             System.exit(1);
         }
@@ -46,7 +46,7 @@ public class Input{
 
         // Try to make two variables for the files else 
         // make a new output file with an error message
-
+        //Can't open file error
         try {   
             InputFile = new File(args[0]);
             outputFile = new File(args[1]);
@@ -55,7 +55,7 @@ public class Input{
         }
         catch(IOException ioException){
             writer = new PrintWriter("outputfile.txt", "UTF-8");
-            writer.println("Error, Cannot open file");
+            writer.println("Error while parsing input file");
             writer.close();
             System.exit(1);
         }
@@ -80,9 +80,10 @@ public class Input{
         while(line.isEmpty()) {
             line = br.readLine();
         }
+        //Name of previous not in file error
         if (line.contains("forced partial assignment:") && (line.replace(" ", "").equals("forcedpartialassignment:"))) {
             if(Previous != "Name") {
-                writer.println("Error: The name of previous not in file");
+                writer.println("Error while parsing input file");
                 writer.close();
                 System.exit(1);
             }
@@ -99,20 +100,23 @@ public class Input{
                 char tasks = splitline[3];
                 int taskin = pmachine.indexOf(machines); 
                 int taskout = ptasks.indexOf(tasks); 
+                //There are no such characters error
                 if(taskin == -1 || taskout == -1) {
-                    writer.println("Error: there are no such Characters");
+                    writer.println("Error while parsing input file");
                     writer.close();
                     System.exit(1);
                 }
+                //There are missing characters error
                 try {
                 if(splitline[0] != '(' || splitline[2] == ',' || splitline[4] == ')') {
-                	 writer.println("Error: There are Characters missing");
+                	 writer.println("Error while parsing input file");
                 	 writer.close();
                      System.exit(1);
                 	}
                 }
+                //missing character error
                 catch(ArrayIndexOutOfBoundsException e) {
-               	 	writer.println("Error: Missing Character");
+               	 	writer.println("Error while parsing input file");
                	 	writer.close();
                     System.exit(1);
                 }
@@ -121,9 +125,10 @@ public class Input{
                 line = br.readLine(); 
             }
         }
+        //The name of previous not in file error
         if (line.contains("forbidden machine:") && (line.replace(" ", "").equals("forbiddenmachine:"))) {
             if(Previous != "forced partial assignment" ) {
-                writer.println("Error: The name of previous not in file");
+                writer.println("Error while parsing input file");
                 writer.close();
                 System.exit(1);
             }
@@ -135,28 +140,31 @@ public class Input{
             		line = br.readLine();
             		continue;
             	}
+            	//there are no such characters error
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
                 char tasks = splitline[3];
                 int taskin = pmachine.indexOf(machines); 
                 int taskout = ptasks.indexOf(tasks); 
                 if(taskin == -1 || taskout == -1) {
-                    writer.println("Error: there are no such Characters");
+                    writer.println("Error while parsing input file");
                     writer.close();
                     System.exit(1);
                 }
+                //there are characters missing error
                 if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
-               	 writer.println("Error: There are Characters missing");
-               	 writer.close();
-                 System.exit(1);
+                	 writer.println("Error while parsing input file");
+                	 writer.close();
+                	 System.exit(1);
                }
                 char[] charArray = {machines,tasks};
                 forbiddenMachine.add(charArray);
                 line = br.readLine(); 
             }
+            //The name of previous not in file error
             if (line.contains("too-near tasks:") && (line.replace(" ", "").equals("too-neartasks:"))) {
                 if(Previous != "forbidden machine" ) {
-                    writer.println("Error: The name of previous not in file");
+                    writer.println("Error while parsing input file");
                     writer.close();
                     System.exit(1);
                 }
@@ -174,21 +182,24 @@ public class Input{
                     int taskin = ptasks.indexOf(machines); 
                     int taskout = ptasks.indexOf(tasks); 
 
+                    //There are no such characters error
                     if(taskin == -1 || taskout == -1) {
-                        writer.println("Error: there are no such Characters");
+                        writer.println("Error while parsing input file");
                         writer.close();
                         System.exit(1);
                     }
+                    //There are missing characters error
                     try {
                     if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
-                   	 	writer.println("Error: There are Characters missing");
+                   	 	writer.println("Error while parsing input file");
                    	 	writer.close();
                    	 	System.exit(1);
                         
                    }
                     }
+                    //character missing error
                     catch(ArrayIndexOutOfBoundsException e) {
-                   	 	writer.println("Error: Character Missing");
+                   	 	writer.println("Error while parsing input file");
                    	 	writer.close();
                         System.exit(1);
                     }
@@ -196,9 +207,10 @@ public class Input{
                     tooNear.add(charArray);
                     line = br.readLine();
                 }
+                //The name of previous not in file error
                 if (line.contains("machine penalties:") && (line.replace(" ", "").equals("machinepenalties:"))) {
                     if(Previous != "too-near tasks" ) {
-                        writer.println("Error: The name of previous not in file");
+                        writer.println("Error while parsing input file");
                         writer.close();
                         System.exit(1);
                     }
@@ -211,10 +223,11 @@ public class Input{
                     		line = br.readLine();
                     		continue;
                     	}
+                    	//There are characters missing error
                         String[] splitted = line.split("\\s+");
                         int length = splitted.length;
                         if (splitted.length != 8) {
-                          	 writer.println("Error: There are Characters missing");
+                         	 writer.println("Error while parsing input file");
                           	 writer.close();
                              System.exit(1);        	
                         }
@@ -224,9 +237,10 @@ public class Input{
                         line = br.readLine();
                         count++;
                     }
+                    //The name of previous not in file error
                     if (line.contains("too-near penalties") && (line.replace(" ", "").equals("too-nearpenalties"))) {
                         if(Previous != "machine penalties" ) {
-                            writer.println("Error: The name of previous not in file");
+                            writer.println("Error while parsing input file");
                             writer.close();
                             System.exit(1);
                         }
@@ -244,8 +258,9 @@ public class Input{
                                 line = line.replace("(", "");
                                 line = line.replace(" ", "");
                         	}
+                        	//There are characters missing error
                         	else {
-                              	 writer.println("Error: There are Characters missing");
+                             	 writer.println("Error while parsing input file");
                                  writer.close();
                               	 System.exit(1);
                         	}
@@ -256,8 +271,9 @@ public class Input{
                             int taskin = ptasks.indexOf(machines); 
                             int taskout = ptasks.indexOf(tasks); 
                             int theNum = Integer.parseInt(num);
+                            //There are no such characters error
                             if(taskin == -1 || taskout == -1 || theNum == -1) {
-                                writer.println("Error: there are no such Characters");
+                                writer.println("Error while parsing input file");
                                 writer.close();
                                 System.exit(1);
                                 
