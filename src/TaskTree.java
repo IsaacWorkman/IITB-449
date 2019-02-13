@@ -64,6 +64,7 @@ public class TaskTree {
 				if (!currentNode.getInvalidNeighbours().contains(topNode.getName())) {
 					this.lowestPenalty = currentPenalty;
 					this.bestNode = currentNode;
+					usedTasks.remove((Character)currentNode.getName());
 					return;
 				}
 			}
@@ -112,15 +113,19 @@ public class TaskTree {
 			System.out.println("Number of children = " + currentNode.getChildren().size());
 			if(currentNode.getChildren().isEmpty()) {
 				//System.out.println("no children");
+				usedTasks.remove((Character)currentNode.getName());
 				return;
 			}
 			//checks for a better (lower) penalty score.
 			//Recurses on each potential child.
 			if (!currentNode.getChildren().isEmpty()) {
 				for (TaskNode child : currentNode.getChildren()) {
+					System.out.println("chile for find pair: " + child.getName());
+					System.out.println();
 					findPairs(child);
 				}
 			}
+
 			if (currentNode.getDepth() != -1) {
 				usedTasks.remove((Character) currentNode.getTask().getName());
 			}
