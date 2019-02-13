@@ -1,28 +1,27 @@
 Name:
-OhHello
-
+g
 forced partial assignment:
-(1, D)
-(4, E)
-
 forbidden machine:
-(5, B)
-(3, H)
-
+(5,G)
+(6,D)
 too-near tasks:
-(G, H)
-(A, F)
-
+(A,B)
+(F,E)
+(A,F)
+(H,A)
 machine penalties:
-0 1 2 3 4 5 6 9
-2 6 4 7 2 7 2 8
-2 6 2 6 2 6 2 7
-5 8 3 9 7 9 5 1
-6 3 8 2 4 7 9 2
-5 2 6 9 4 8 2 7
-2 7 3 7 2 5 3 7
-7 2 7 8 9 2 4 2
-
-too-near penalties:
-(A, B, 5)
-(C, G, 9)
+0 6 8 1 5 2 4 4
+9 7 4 1 7 4 31 9
+21 23 6 1 17 5 8 9
+5 4 0 7 1 4 2 2
+7 1 8 5 16 9 34 7
+8 2 6 4 4 1 2 7
+8 1 6 3 1 1 7 11
+2 11 3 7 9 10 5 1
+too-near penalties
+(A,C,11)
+(A,E,5)
+(B,F,13)
+(D,G,3)
+(H,B,9)
+(G,C,8)

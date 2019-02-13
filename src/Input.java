@@ -83,10 +83,10 @@ public class Input{
             line = br.readLine();
         }
         if (line.contains("forced partial assignment:") && (line.replace(" ", "").equals("forcedpartialassignment:"))) {
-            System.out.println("hi");
+            System.out.println("forced partial assignment:");
             line = br.readLine();
 
-            while(!line.contains("forbidden machine:")) {
+            while(!line.contains("forbidden")) {
             	if (line.isEmpty()) {
             		line = br.readLine();
             		continue;
@@ -117,6 +117,7 @@ public class Input{
             }
         }
         if (line.contains("forbidden machine:") && (line.replace(" ", "").equals("forbiddenmachine:"))) {
+        	System.out.println("forbidden machine");
             line = br.readLine();
             while(!line.contains("too-near tasks:")) {
                 //System.out.println(line);
@@ -141,7 +142,7 @@ public class Input{
                 char[] charArray = {machines,tasks};
                 //forcedPartial[forcedPartial.length] = charArray; 
                 //System.out.print("b\n" );
-                forcedPartial.add(charArray);
+                forbiddenMachine.add(charArray);
                 //System.out.print("c\n" );
                 System.out.println(charArray);
                 line = br.readLine(); 

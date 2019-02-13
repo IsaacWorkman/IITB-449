@@ -12,8 +12,14 @@ public class Main {
 			System.out.println("Processing deck!");
 			Deck ourDeck = new Deck(ourInput, args[1]);
 			System.out.println("Creating tree!");
-			TaskTree myTree = new TaskTree(ourDeck, ourInput.tooNearPen);
+			TaskTree myTree = new TaskTree(ourDeck, ourInput);
 			System.out.println("lowest penalty: " + myTree.getPenalty());
+			System.out.println("Sequence: ");
+			TaskNode currentNode = myTree.getBestNode();
+			while (currentNode.getDepth()!= -1) {
+				System.out.print(currentNode.getTask().getName());
+				currentNode = currentNode.getParent();
+			}
 		}
 		catch(IOException e) {
 			System.out.println("Something went wrong. Unsure what it is. Error:");

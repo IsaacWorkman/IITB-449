@@ -22,13 +22,14 @@ public class TaskNode {
 		this.depth = -1;
 	}
 	//Adds a single task to the list of invalid neighbours. Invalid neighbours can not be the parent of child of this node.
-	public void AddInvalidNeighbours(Character badNeighbour) {
-		this.invalidNeighbours.add(badNeighbour);
+	public void addInvalidNeighbours(ArrayList<char[]> badNeighbours) {
+		for (int i = 0; i < badNeighbours.size(); i++) {
+            if (badNeighbours.get(i)[0] == this.getName()) {
+                invalidNeighbours.add(badNeighbours.get(i)[1]);
+            }
+        }
 	}
 	//Adds several tasks to the list of invalid neighbours.
-	public void AddInvalidNeighbours(ArrayList<Character> badNeighbours) {
-		this.invalidNeighbours.addAll(badNeighbours);
-	}
 	
 	@SuppressWarnings("unchecked")
 	//Get functions.
@@ -38,9 +39,12 @@ public class TaskNode {
 	public int getDepth() {return this.depth;}
 	public ArrayList<TaskNode> getChildren(){return this.children;}
 	public Task getTask() {return this.template;}
-	public void setChildren(ArrayList<Task> newChildren) {
+	public void setChildren(ArrayList<Task> newChildren, Input ourInput) {
 		for(Task aTask: newChildren) {
-			this.children.add(new TaskNode(aTask, this.depth + 1, this));
+			//System.out.println("creating child");
+			TaskNode child = new TaskNode(aTask, this.depth+1, this);
+			child.addInvalidNeighbours(ourInput.tooNear);
+			this.children.add(child);
 		}
 	}
 	public char getName() {return this.template.getName();}
