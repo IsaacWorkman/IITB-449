@@ -32,7 +32,7 @@ public class Input{
             writer = new PrintWriter("outputfile.txt", "UTF-8");
             writer.println("Error while parsing input file");
             writer.close();
-            System.exit(1);
+            System.exit(0);
         }
         //Too many arguments error
         if(args.length > 2){
@@ -40,7 +40,7 @@ public class Input{
             writer = new PrintWriter(outputFile, "UTF-8");
             writer.println("Error while parsing input file");
             writer.close();
-            System.exit(1);
+            System.exit(0);
         }
 
 
@@ -57,7 +57,7 @@ public class Input{
             writer = new PrintWriter("outputfile.txt", "UTF-8");
             writer.println("Error while parsing input file");
             writer.close();
-            System.exit(1);
+            System.exit(0);
         }
 
         // Reading input file line by line, if the line contains : then that would be the start of a new variable. 
@@ -85,7 +85,7 @@ public class Input{
             if(Previous != "Name") {
                 writer.println("Error while parsing input file");
                 writer.close();
-                System.exit(1);
+                System.exit(0);
             }
         	Previous = "forced partial assignment";
             line = br.readLine();
@@ -102,23 +102,23 @@ public class Input{
                 int taskout = ptasks.indexOf(tasks); 
                 //There are no such characters error
                 if(taskin == -1 || taskout == -1) {
-                    writer.println("Error while parsing input file");
+                    writer.println("invalid machine/task");
                     writer.close();
-                    System.exit(1);
+                    System.exit(0);
                 }
                 //There are missing characters error
                 try {
                 if(splitline[0] != '(' || splitline[2] == ',' || splitline[4] == ')') {
                 	 writer.println("Error while parsing input file");
                 	 writer.close();
-                     System.exit(1);
+                     System.exit(0);
                 	}
                 }
                 //missing character error
                 catch(ArrayIndexOutOfBoundsException e) {
                	 	writer.println("Error while parsing input file");
                	 	writer.close();
-                    System.exit(1);
+                    System.exit(0);
                 }
                 char[] charArray = {machines,tasks};
                 forcedPartial.add(charArray);
@@ -130,7 +130,7 @@ public class Input{
             if(Previous != "forced partial assignment" ) {
                 writer.println("Error while parsing input file");
                 writer.close();
-                System.exit(1);
+                System.exit(0);
             }
         	Previous = "forbidden machine";
             line = br.readLine();
@@ -147,15 +147,15 @@ public class Input{
                 int taskin = pmachine.indexOf(machines); 
                 int taskout = ptasks.indexOf(tasks); 
                 if(taskin == -1 || taskout == -1) {
-                    writer.println("Error while parsing input file");
+                    writer.println("invalid machine/task");
                     writer.close();
-                    System.exit(1);
+                    System.exit(0);
                 }
                 //there are characters missing error
                 if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
                 	 writer.println("Error while parsing input file");
                 	 writer.close();
-                	 System.exit(1);
+                	 System.exit(0);
                }
                 char[] charArray = {machines,tasks};
                 forbiddenMachine.add(charArray);
@@ -166,7 +166,7 @@ public class Input{
                 if(Previous != "forbidden machine" ) {
                     writer.println("Error while parsing input file");
                     writer.close();
-                    System.exit(1);
+                    System.exit(0);
                 }
             	line = br.readLine();
                 Previous = "too-near tasks";
@@ -186,14 +186,14 @@ public class Input{
                     if(taskin == -1 || taskout == -1) {
                         writer.println("Error while parsing input file");
                         writer.close();
-                        System.exit(1);
+                        System.exit(0);
                     }
                     //There are missing characters error
                     try {
                     if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
                    	 	writer.println("Error while parsing input file");
                    	 	writer.close();
-                   	 	System.exit(1);
+                   	 	System.exit(0);
                         
                    }
                     }
@@ -201,7 +201,7 @@ public class Input{
                     catch(ArrayIndexOutOfBoundsException e) {
                    	 	writer.println("Error while parsing input file");
                    	 	writer.close();
-                        System.exit(1);
+                        System.exit(0);
                     }
                     char[] charArray = {machines,tasks};
                     tooNear.add(charArray);
@@ -212,7 +212,7 @@ public class Input{
                     if(Previous != "too-near tasks" ) {
                         writer.println("Error while parsing input file");
                         writer.close();
-                        System.exit(1);
+                        System.exit(0);
                     }
                 	line = br.readLine();
                     int count = 0;
@@ -229,7 +229,7 @@ public class Input{
                         if (splitted.length != 8) {
                          	 writer.println("Error while parsing input file");
                           	 writer.close();
-                             System.exit(1);        	
+                             System.exit(0);        	
                         }
                         for( int i = 0; i < 8; i++) {
                             machinePen[count][i] = Integer.parseInt(splitted[i]);
@@ -242,7 +242,7 @@ public class Input{
                         if(Previous != "machine penalties" ) {
                             writer.println("Error while parsing input file");
                             writer.close();
-                            System.exit(1);
+                            System.exit(0);
                         }
                         
                     	line = br.readLine();
@@ -262,7 +262,7 @@ public class Input{
                         	else {
                              	 writer.println("Error while parsing input file");
                                  writer.close();
-                              	 System.exit(1);
+                              	 System.exit(0);
                         	}
                             String[] splitLine = line.split(",");
                             String machines  = splitLine[0];
@@ -270,12 +270,20 @@ public class Input{
                             String num = splitLine[2];
                             int taskin = ptasks.indexOf(machines); 
                             int taskout = ptasks.indexOf(tasks); 
-                            int theNum = Integer.parseInt(num);
+                            try {
+                            	int theNum = Integer.parseInt(num);
+                            }
+                            catch (NumberFormatException e) {
+                            	writer.write("invalid penalty");
+                            	writer.close();
+                            	System.exit(0);
+                            }
+                            
                             //There are no such characters error
-                            if(taskin == -1 || taskout == -1 || theNum == -1) {
-                                writer.println("Error while parsing input file");
+                            if(taskin == -1 || taskout == -1) {
+                                writer.println("invalid task");
                                 writer.close();
-                                System.exit(1);
+                                System.exit(0);
                                 
                             }
                             String[] charArray = {machines,tasks,num};
