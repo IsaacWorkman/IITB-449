@@ -91,7 +91,7 @@ public class Deck {
 			}
     	} else if (errorCode == 2) {
     		try {
-				writer.write("forbidden error");
+				writer.write("invalid machine/task");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
