@@ -105,6 +105,10 @@ public class Input{
                     writer.println("Error: there are no such Characters");
                     System.exit(1);
                 }
+                if(splitline[0] != '(' || splitline[2] == ',' || splitline[4] == ')') {
+                	 writer.println("Error: There are Characters missing");
+                     System.exit(1);
+                }
                 //System.out.print("a\n" );
                 char[] charArray = {machines,tasks};
                 //forcedPartial[forcedPartial.length] = charArray; 
@@ -138,6 +142,10 @@ public class Input{
                     writer.println("Error: there are no such Characters");
                     System.exit(1);
                 }
+                if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
+               	 writer.println("Error: There are Characters missing");
+                    System.exit(1);
+               }
                 //System.out.print("a\n" );
                 char[] charArray = {machines,tasks};
                 //forcedPartial[forcedPartial.length] = charArray; 
@@ -168,6 +176,10 @@ public class Input{
                         writer.println("Error: there are no such Characters");
                         System.exit(1);
                     }
+                    if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
+                   	 writer.println("Error: There are Characters missing");
+                        System.exit(1);
+                   }
                     char[] charArray = {machines,tasks};
                     tooNear.add(charArray);
                     //System.out.println("a");
@@ -187,7 +199,8 @@ public class Input{
                         //System.out.println(splitted[0]);
                         int length = splitted.length;
                         if (splitted.length != 8) {
-                            //TODO:file content error
+                          	 writer.println("Error: There are Characters missing");
+                             System.exit(1);        	
                         }
                         for( int i = 0; i < 8; i++) {
 
@@ -204,10 +217,17 @@ public class Input{
                         		line = br.readLine();
                         		continue;
                         	}
+                        	
+                        	if(line.contains("(") || line.contains(",") || line.contains(")")) {
+                                line = line.replace(")", "");
+                                line = line.replace("(", "");
+                                line = line.replace(" ", "");
+                        	}
+                        	else {
+                              	 writer.println("Error: There are Characters missing");
+                                 System.exit(1);
+                        	}
                             //System.out.println(line);
-                            line = line.replace(")", "");
-                            line = line.replace("(", "");
-                            line = line.replace(" ", "");
                             String[] splitLine = line.split(",");
                             //char[] splitline = line.toCharArray();
                             String machines  = splitLine[0];
