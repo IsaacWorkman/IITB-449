@@ -6,18 +6,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		try{
-			System.out.println("Getting input!");
+		try {
 			Input ourInput = new Input(args);
-			System.out.println("Processing deck!");
 			Deck ourDeck = new Deck(ourInput, args[1]);
-			System.out.println("Creating tree!");
 			TaskTree myTree = new TaskTree(ourDeck, ourInput);
-			System.out.println("lowest penalty: " + myTree.getPenalty());
-			System.out.println("Sequence: ");
 			TaskNode currentNode = myTree.getBestNode();
 			while (currentNode.getDepth()!= -1) {
-				System.out.print(currentNode.getTask().getName());
 				currentNode = currentNode.getParent();
 			}
 		}

@@ -31,7 +31,6 @@ public class Input{
             // NOTE: This is assuming that the single output file will only be the input file
             writer = new PrintWriter("outputfile.txt", "UTF-8");
             writer.println("Error, Missing File");
-            System.out.println("Error, Missing File");
             writer.close();
             System.exit(1);
         }
@@ -40,7 +39,6 @@ public class Input{
             // NOTE: This is assuming that the single output file will only be the input file
             writer = new PrintWriter(outputFile, "UTF-8");
             writer.println("Error, Too many Files given");
-            System.out.println("Error, Too many Files given");
             writer.close();
             System.exit(1);
         }
@@ -58,7 +56,6 @@ public class Input{
         catch(IOException ioException){
             writer = new PrintWriter("outputfile.txt", "UTF-8");
             writer.println("Error, Cannot open file");
-            System.err.println("Error, Cannot open file"); 
             writer.close();
             System.exit(1);
         }
@@ -86,9 +83,9 @@ public class Input{
         if (line.contains("forced partial assignment:") && (line.replace(" ", "").equals("forcedpartialassignment:"))) {
             if(Previous != "Name") {
                 writer.println("Error: The name of previous not in file");
+                writer.close();
                 System.exit(1);
             }
-        	System.out.println("forced partial assignment:");
         	Previous = "forced partial assignment";
             line = br.readLine();
             
@@ -97,87 +94,68 @@ public class Input{
             		line = br.readLine();
             		continue;
             	}
-                //System.out.println(line);
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
-                //System.out.println(machines);
                 char tasks = splitline[3];
-                //System.out.println(tasks);
                 int taskin = pmachine.indexOf(machines); 
-                //System.out.println(taskin);
                 int taskout = ptasks.indexOf(tasks); 
-                //System.out.println(taskout);
                 if(taskin == -1 || taskout == -1) {
                     writer.println("Error: there are no such Characters");
+                    writer.close();
                     System.exit(1);
                 }
                 if(splitline[0] != '(' || splitline[2] == ',' || splitline[4] == ')') {
                 	 writer.println("Error: There are Characters missing");
+                	 writer.close();
                      System.exit(1);
                 }
-                //System.out.print("a\n" );
                 char[] charArray = {machines,tasks};
-                //forcedPartial[forcedPartial.length] = charArray; 
-                //System.out.print("b\n" );
                 forcedPartial.add(charArray);
-                //System.out.print("c\n" );
-                System.out.println(charArray);
                 line = br.readLine(); 
-                //System.out.println(line);
             }
         }
         if (line.contains("forbidden machine:") && (line.replace(" ", "").equals("forbiddenmachine:"))) {
             if(Previous != "forced partial assignment" ) {
                 writer.println("Error: The name of previous not in file");
+                writer.close();
                 System.exit(1);
             }
-        	System.out.println("forbidden machine");
         	Previous = "forbidden machine";
             line = br.readLine();
              
             while(!line.contains("too-near tasks:")) {
-                //System.out.println(line);
             	if (line.isEmpty()) {
             		line = br.readLine();
             		continue;
             	}
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
-                //System.out.println(machines);
                 char tasks = splitline[3];
-                //System.out.println(tasks);
                 int taskin = pmachine.indexOf(machines); 
-                //System.out.println(taskin);
                 int taskout = ptasks.indexOf(tasks); 
-                //System.out.println(taskout);
                 if(taskin == -1 || taskout == -1) {
                     writer.println("Error: there are no such Characters");
+                    writer.close();
                     System.exit(1);
                 }
                 if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
                	 writer.println("Error: There are Characters missing");
-                    System.exit(1);
+               	 writer.close();
+                 System.exit(1);
                }
-                //System.out.print("a\n" );
                 char[] charArray = {machines,tasks};
-                //forcedPartial[forcedPartial.length] = charArray; 
-                //System.out.print("b\n" );
                 forbiddenMachine.add(charArray);
-                //System.out.print("c\n" );
-                System.out.println(charArray);
                 line = br.readLine(); 
-                //System.out.println(line);
             }
             if (line.contains("too-near tasks:") && (line.replace(" ", "").equals("too-neartasks:"))) {
                 if(Previous != "forbidden machine" ) {
                     writer.println("Error: The name of previous not in file");
+                    writer.close();
                     System.exit(1);
                 }
             	line = br.readLine();
-                System.out.println("too-near tasks");
                 Previous = "too-near tasks";
 
-                
                 while(!line.contains("machine penalties:")) {
                 	if (line.isEmpty()) {
                 		line = br.readLine();
@@ -185,33 +163,33 @@ public class Input{
                 	}
                     char[] splitline = line.toCharArray();
                     char machines  = splitline[1];
-                    //System.out.println(machines);
                     char tasks = splitline[3];
-                    //System.out.println(machines);
-                    int taskin =ptasks.indexOf(machines); 
+                    int taskin = ptasks.indexOf(machines); 
                     int taskout = ptasks.indexOf(tasks); 
+
                     if(taskin == -1 || taskout == -1) {
                         writer.println("Error: there are no such Characters");
+                        writer.close();
                         System.exit(1);
                     }
                     if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
-                   	 writer.println("Error: There are Characters missing");
-                        System.exit(1);
+                   	 	writer.println("Error: There are Characters missing");
+                   	 	writer.close();
+                   	 	System.exit(1);
+                        
                    }
                     char[] charArray = {machines,tasks};
                     tooNear.add(charArray);
-                    //System.out.println("a");
                     line = br.readLine();
-                    System.out.println(charArray); 
                 }
                 if (line.contains("machine penalties:") && (line.replace(" ", "").equals("machinepenalties:"))) {
                     if(Previous != "too-near tasks" ) {
                         writer.println("Error: The name of previous not in file");
+                        writer.close();
                         System.exit(1);
                     }
                 	line = br.readLine();
                     int count = 0;
-                    System.out.println("machine penalties");
                     Previous = "machine penalties";
                     
                     while(!line.contains("too-near penalties")) {
@@ -220,14 +198,13 @@ public class Input{
                     		continue;
                     	}
                         String[] splitted = line.split("\\s+");
-                        //System.out.println(splitted[0]);
                         int length = splitted.length;
                         if (splitted.length != 8) {
                           	 writer.println("Error: There are Characters missing");
+                          	 writer.close();
                              System.exit(1);        	
                         }
                         for( int i = 0; i < 8; i++) {
-
                             machinePen[count][i] = Integer.parseInt(splitted[i]);
                         }
                         line = br.readLine();
@@ -236,11 +213,11 @@ public class Input{
                     if (line.contains("too-near penalties") && (line.replace(" ", "").equals("too-nearpenalties"))) {
                         if(Previous != "machine penalties" ) {
                             writer.println("Error: The name of previous not in file");
+                            writer.close();
                             System.exit(1);
                         }
                         
                     	line = br.readLine();
-                        System.out.println("too-near penalties");
                         Previous = "too-near penalties";
                         while(line != null) {
                         	if (line.isEmpty()) {
@@ -255,11 +232,10 @@ public class Input{
                         	}
                         	else {
                               	 writer.println("Error: There are Characters missing");
-                                 System.exit(1);
+                                 writer.close();
+                              	 System.exit(1);
                         	}
-                            //System.out.println(line);
                             String[] splitLine = line.split(",");
-                            //char[] splitline = line.toCharArray();
                             String machines  = splitLine[0];
                             String tasks = splitLine[1];
                             String num = splitLine[2];
@@ -268,18 +244,16 @@ public class Input{
                             int theNum = Integer.parseInt(num);
                             if(taskin == -1 || taskout == -1 || theNum == -1) {
                                 writer.println("Error: there are no such Characters");
+                                writer.close();
                                 System.exit(1);
+                                
                             }
                             String[] charArray = {machines,tasks,num};
                             tooNearPen.add(charArray);
                             line = br.readLine(); 
-                            System.out.println(charArray);
-                            //System.out.println("a");
-                        }
-                        //System.out.println("c");
+                            }
                         line = br.readLine();
                         if (line == null){
-                            //  System.out.println("f");
                             br.close();
                         }
                     }

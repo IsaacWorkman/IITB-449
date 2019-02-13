@@ -41,16 +41,13 @@ public class TaskNode {
 	public Task getTask() {return this.template;}
 	public void setChildren(ArrayList<Task> newChildren, Input ourInput) {
 		for(Task aTask: newChildren) {
-			//System.out.println("creating child");
 			TaskNode child = new TaskNode(aTask, this.depth+1, this);
 			child.addInvalidNeighbours(ourInput.tooNear);
 			this.children.add(child);
 		}
 	}
 	public char getName() {return this.template.getName();}
-	
-	
-	//TODO: Complete function stub
+
 	public int getTooNearPenalty(char adjacent) {
 		return 0;
 	}

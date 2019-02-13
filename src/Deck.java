@@ -67,13 +67,6 @@ public class Deck {
         for (Machine mach: sortedDeck) {
             mach.sortedQueue();
         }
-        
-        for (int i = 0; i < 8; i++) {
-        	for (int j = 0; j < sortedDeck.get(i).sortedList.size(); j++) {
-        		System.out.print(sortedDeck.get(i).sortedList.get(j).getName()+ " ");
-        	}
-        	System.out.println();
-        }
     }
     
     private void outputError(int errorCode, String outputFile) {
