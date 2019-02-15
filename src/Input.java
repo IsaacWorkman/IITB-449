@@ -67,11 +67,13 @@ public class Input{
         if (line == null) {
             return;
         }
-        while (!line.contains("Name")) {
+        String testLine = line.replace(" ", "");
+        while (line.isEmpty() || testLine.isEmpty()) {
             line = br.readLine();
         }
         line = br.readLine();
-        while (line.isEmpty()) {
+        testLine = line.replace(" ", "");
+        while (line.isEmpty() || testLine.isEmpty()) {
             line = br.readLine();
         }
         Name = line;
@@ -91,10 +93,11 @@ public class Input{
             line = br.readLine();
             
             while(!line.contains("forbidden")) {
-            	if (line.isEmpty()) {
-            		line = br.readLine();
-            		continue;
-            	}
+                testLine = line.replace(" ", "");
+                if (line.isEmpty() || testLine.isEmpty()) {
+                    line = br.readLine();
+                    continue;
+                }
                 char[] splitline = line.toCharArray();
                 char machines  = splitline[1];
                 char tasks = splitline[3];
@@ -108,8 +111,8 @@ public class Input{
                 }
                 //There are missing characters error
                 try {
-                if(splitline[0] != '(' || splitline[2] == ',' || splitline[4] == ')') {
-                	 writer.println("Error while parsing input file");
+                if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
+                    writer.println("Error while parsing input file");
                 	 writer.close();
                      System.exit(0);
                 	}
@@ -125,6 +128,11 @@ public class Input{
                 line = br.readLine(); 
             }
         }
+        else {
+            writer.println("Error while parsing input file");
+            writer.close();
+            System.exit(0);
+        }
         //The name of previous not in file error
         if (line.contains("forbidden machine:") && (line.replace(" ", "").equals("forbiddenmachine:"))) {
             if(Previous != "forced partial assignment" ) {
@@ -136,7 +144,8 @@ public class Input{
             line = br.readLine();
              
             while(!line.contains("too-near tasks:")) {
-            	if (line.isEmpty()) {
+                testLine = line.replace(" ", "");
+            	if (line.isEmpty() || testLine.isEmpty()) {
             		line = br.readLine();
             		continue;
             	}
@@ -153,7 +162,7 @@ public class Input{
                 }
                 //there are characters missing error
                 if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
-                	 writer.println("Error while parsing input file");
+                    writer.println("Error while parsing input file");
                 	 writer.close();
                 	 System.exit(0);
                }
@@ -172,10 +181,11 @@ public class Input{
                 Previous = "too-near tasks";
 
                 while(!line.contains("machine penalties:")) {
-                	if (line.isEmpty()) {
-                		line = br.readLine();
-                		continue;
-                	}
+                    testLine = line.replace(" ", "");
+                    if (line.isEmpty() || testLine.isEmpty()) {
+                        line = br.readLine();
+                        continue;
+                    }
                     char[] splitline = line.toCharArray();
                     char machines  = splitline[1];
                     char tasks = splitline[3];
@@ -191,7 +201,7 @@ public class Input{
                     //There are missing characters error
                     try {
                     if(splitline[0] != '(' || splitline[2] != ',' || splitline[4] != ')') {
-                   	 	writer.println("Error while parsing input file");
+                        writer.println("Error while parsing input file");
                    	 	writer.close();
                    	 	System.exit(0);
                         
@@ -218,11 +228,12 @@ public class Input{
                     int count = 0;
                     Previous = "machine penalties";
                     
-                    while(!line.contains("too-near penalties")) {
-                    	if (line.isEmpty()) {
-                    		line = br.readLine();
-                    		continue;
-                    	}
+                    while(!line.contains("too-near penalities")) {
+                        testLine = line.replace(" ", "");
+                        if (line.isEmpty() || testLine.isEmpty()) {
+                            line = br.readLine();
+                            continue;
+                        }
                     	//There are characters missing error
                         String[] splitted = line.split("\\s+");
                         for( int i = 0; i < 8; i++) {
@@ -252,7 +263,7 @@ public class Input{
                         System.exit(0);
                     }
                     //The name of previous not in file error
-                    if (line.contains("too-near penalties") && (line.replace(" ", "").equals("too-nearpenalties"))) {
+                    if (line.contains("too-near penalities") && (line.replace(" ", "").equals("too-nearpenalities"))) {
                         if(Previous != "machine penalties" ) {
                             writer.println("Error while parsing input file");
                             writer.close();
@@ -260,12 +271,13 @@ public class Input{
                         }
                         
                     	line = br.readLine();
-                        Previous = "too-near penalties";
+                        Previous = "too-near penalities";
                         while(line != null) {
-                        	if (line.isEmpty()) {
-                        		line = br.readLine();
-                        		continue;
-                        	}
+                            testLine = line.replace(" ", "");
+                            if (line.isEmpty() || testLine.isEmpty()) {
+                                line = br.readLine();
+                                continue;
+                            }
                         	
                         	if(line.contains("(") || line.contains(",") || line.contains(")")) {
                                 line = line.replace(")", "");
@@ -274,6 +286,7 @@ public class Input{
                         	}
                         	//There are characters missing error
                         	else {
+                        	    System.out.println("11");
                              	 writer.println("Error while parsing input file");
                                  writer.close();
                               	 System.exit(0);

@@ -16,8 +16,10 @@ public class Task {
         penaltyValue = penalty;
         for (int i = 0; i < tooNear.size(); i++) {
             if (tooNear.get(i)[0].charAt(0) == taskName) {
+
                 String[] tooNearPair = {tooNear.get(i)[1], tooNear.get(i)[2]};
                 tooNearPartners.add(tooNearPair);
+
             }
         }
     }
@@ -28,9 +30,11 @@ public class Task {
     
     public int getNumber() {return number;}
     
-    public int getTooNearPenalty(String tooNearName) {
+    public int getTooNearPenalty(char tooNearName) {
+        System.out.println("taskName: " + name + " " + tooNearPartners.size());
         for (int i = 0; i < tooNearPartners.size(); i++) {
-            if (tooNearPartners.get(i)[0] == tooNearName) {
+            System.out.println("task: " + name + " partner: " + tooNearPartners.get(i)[0] + " " + tooNearPartners.get(i)[1]);
+            if (tooNearPartners.get(i)[0].charAt(0) == tooNearName) {
                 return Integer.parseInt(tooNearPartners.get(i)[1]);
             }
         }

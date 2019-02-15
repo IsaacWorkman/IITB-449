@@ -10,7 +10,7 @@ public class TaskTree {
 	private int lowestPenalty = Integer.MAX_VALUE;
 	private TaskNode root = new TaskNode();
 	private ArrayList<Character> usedTasks = new ArrayList<Character>();
-	//boolean penaltySet = false;
+	boolean penaltySet = false;
 	private TaskNode topNode;
 	private Input ourInput;
 	//TODO: Add implementation to constructor method to receive massaged input data. (Aka the "kingdex")
@@ -49,6 +49,7 @@ public class TaskTree {
 					this.lowestPenalty = currentPenalty;
 					this.bestNode = currentNode;
 					usedTasks.remove((Character)currentNode.getName());
+					penaltySet = true;
 					return;
 				}
 			}
@@ -102,10 +103,18 @@ public class TaskTree {
 		if (depth == 7) {
 		    penalty += bottomNode.getTooNearPenalty(topNode.getName());
 		}
-		for (int i = 0; i < depth; i++) {
+		for (int i = 0; i <= depth; i++) {
 			TaskNode parent = currentNode.getParent();
 			penalty += currentNode.getTask().getPenalty();
-			penalty += parent.getTooNearPenalty(currentNode.getName());
+			System.out.println("hi");
+			if (i > 0) {
+			    char pName = parent.getTask().getName();
+	            System.out.println("no");
+			}
+			
+			if (i > 0) {
+			    penalty += parent.getTask().getTooNearPenalty(currentNode.getName());
+			}
 			
 			currentNode = currentNode.getParent();
 		}

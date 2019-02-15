@@ -8,16 +8,22 @@ public class Main {
 	public static void main(String[] args) {
 		
 		try {
+		    FileWriter writer = null;
+		    try {
+                writer = new FileWriter(args[1], true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 			Input ourInput = new Input(args);
 			Deck ourDeck = new Deck(ourInput, args[1]);
 			TaskTree myTree = new TaskTree(ourDeck, ourInput);
-			TaskNode currentNode = myTree.getBestNode();
-			FileWriter writer = null;
-			try {
-				writer = new FileWriter(args[1], true);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (!myTree.penaltySet) {
+			    System.out.print(myTree.getPenalty());
+			    writer.write("No valid solution possible!");
+			    writer.close();
+                System.exit(0);
 			}
+			TaskNode currentNode = myTree.getBestNode();
 			writer.write("Solution");
 			while (currentNode.getDepth()!= -1) {
 				writer.write(" " + currentNode.getTask().getName());

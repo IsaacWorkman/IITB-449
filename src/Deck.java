@@ -34,7 +34,7 @@ public class Deck {
          */
         for (int i = 0; i < ourInput.forcedPartial.size(); i++) {
             char[] pair = ourInput.forcedPartial.get(i);
-            machineIndex = Character.getNumericValue(pair[0]) -1;
+            machineIndex = Character.getNumericValue(pair[0]) - 1;
             if (assigned.contains(pair[1])) {
                 errorOccured = 1;
                 outputError(errorOccured, outputFile);
@@ -79,12 +79,16 @@ public class Deck {
     	if (errorCode == 1) {
     		try {
 				writer.write("partial assignment error");
+				writer.close();
+				System.exit(0);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
     	} else if (errorCode == 2) {
     		try {
-				writer.write("invalid machine/task");
+				writer.write("no valid solution possible");
+				writer.close();
+                System.exit(0);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
