@@ -17,17 +17,18 @@ public class Main {
 			Input ourInput = new Input(args);
 			Deck ourDeck = new Deck(ourInput, args[1]);
 			TaskTree myTree = new TaskTree(ourDeck, ourInput);
+			
+			
 			if (!myTree.penaltySet) {
-			    System.out.print(myTree.getPenalty());
 			    writer.write("No valid solution possible!");
 			    writer.close();
                 System.exit(0);
 			}
-			TaskNode currentNode = myTree.getBestNode();
+			ArrayList<Character> result = new ArrayList<Character>();
+			result = myTree.getBestOrder();
 			writer.write("Solution");
-			while (currentNode.getDepth()!= -1) {
-				writer.write(" " + currentNode.getTask().getName());
-				currentNode = currentNode.getParent();
+			for (int i = 0; i < result.size(); i++) {
+			    writer.write(" " + result.get(i));
 			}
 			writer.write("; Quality: " + myTree.getPenalty());
 			writer.close();

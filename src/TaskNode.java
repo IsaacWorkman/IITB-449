@@ -47,8 +47,4 @@ public class TaskNode {
 		}
 	}
 	public char getName() {return this.template.getName();}
-
-	public int getTooNearPenalty(char adjacent) {
-		return 0;
-	}
 }

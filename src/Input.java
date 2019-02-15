@@ -286,7 +286,6 @@ public class Input{
                         	}
                         	//There are characters missing error
                         	else {
-                        	    System.out.println("11");
                              	 writer.println("Error while parsing input file");
                                  writer.close();
                               	 System.exit(0);
