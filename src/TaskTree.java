@@ -41,6 +41,7 @@ public class TaskTree {
 		if (currentNode.getDepth() == 0) {
 			topNode = currentNode;
 		}
+		
 			int currentPenalty = calculatePenalty(currentNode);
 			// halt on branches exceeding the current best penalty score.
 			// updates bestNode if node is a leaf and has a lower penalty score
@@ -59,7 +60,10 @@ public class TaskTree {
 				usedTasks.add(currentNode.getTask().getName());
 			}
 			//Retrieves an ArrayList of eligible tasks for the next machine. Assumes it is sorted
-			if (currentNode.getDepth() == 7) {return;}
+			if (currentNode.getDepth() == 7) {
+			    usedTasks.remove((Character)currentNode.getName());
+			    return;
+			    }
 			@SuppressWarnings("unchecked")
 			ArrayList<Task> toCheck	 = (ArrayList<Task>) this.deck.sortedDeck.get(currentNode.getDepth()+1).sortedList.clone();
 		
@@ -76,6 +80,7 @@ public class TaskTree {
 				}
 
 			}
+
 			//Creates new children based off of the keptTasks ArrayList
 			currentNode.setChildren(keptTasks, this.ourInput);
 			if(currentNode.getChildren().isEmpty()) {
@@ -86,6 +91,7 @@ public class TaskTree {
 			//Recurses on each potential child.
 			if (!currentNode.getChildren().isEmpty()) {
 				for (TaskNode child : currentNode.getChildren()) {
+				    
 					findPairs(child);
 				}
 			}

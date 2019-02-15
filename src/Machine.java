@@ -76,7 +76,7 @@ public class Machine {
                 }
             }
             int bound = temp.size();
-            for (int i = 0; i < bound - 1; i++) {
+            for (int i = 0; i < bound; i++) {
                 sortedList.add(temp.poll());
             }
         } 
